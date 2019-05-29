@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import SingIn from './containers/SingIn'
 import SingUp from './containers/SingUp'
+import Admin from './containers/Admin'
+import TabbarAdmin from './hoc/layout/TabbarAdmin'
 import {
     BrowserRouter as Router,
     Route,
@@ -17,24 +19,23 @@ import './assets/vendor/animate/animate.css'
 import './assets/vendor/css-hamburgers/hamburgers.min.css'
 import './assets/vendor/animsition/css/animsition.min.css'
 import './assets/vendor/select2/select2.min.css'
-import './assets/vendor/select2/select2.min.css'
 import './assets/css/main.css'
 import './assets/css/util.css'
-
-// import './assets/vendor/animsition/js/animsition.js'
-// import './assets/vendor/bootstrap/js/popper.js'
-// import './assets/vendor/bootstrap/js/bootstrap.min.js'
-// import './assets/vendor/jquery/jquery-3.2.1.min.js'
-// import './assets/vendor/select2/select2.min.js'
-// import './assets/vendor/daterangepicker/moment.min.js'
-// import './assets/vendor/daterangepicker/daterangepicker.js'
-// import './assets/vendor/countdowntime/countdowntime.js'
-// import './assets/js/main.js'`
+import './assets/css/theme.css'
+import './assets/css/font-face.css'
+import './assets/vendor/perfect-scrollbar/perfect-scrollbar.css'
+import './assets/vendor/slick/slick.css'
 
 
 class App extends Component {
     render() {
-        let routes = (<Switch>
+        let authIsSignin = false
+        let routes =  authIsSignin ? (
+                    <TabbarAdmin>
+                        <Switch>
+                            <Route path="/admin" component={Admin}></Route>
+                        </Switch>
+                    </TabbarAdmin>) : (<Switch>
                         <Route path="/signin" render={() => <SingIn/>} />
                         <Route path="/signup" component={SingUp}></Route>
                         <Redirect to="/signin" />
