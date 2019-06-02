@@ -3,7 +3,11 @@ import React, { Component } from "react";
 import SingIn from './containers/SingIn'
 import SingUp from './containers/SingUp'
 import Admin from './containers/Admin'
+import Home from './containers/Home'
 import TabbarAdmin from './hoc/layout/TabbarAdmin'
+import Tabbar from './containers/Tabbar'
+import Order from './containers/Order'
+import { PAGE } from './Common'
 import {
     BrowserRouter as Router,
     Route,
@@ -29,18 +33,26 @@ import './assets/vendor/slick/slick.css'
 
 class App extends Component {
     render() {
-        let authIsSignin = false
-        let routes =  authIsSignin ? (
-                    <TabbarAdmin>
-                        <Switch>
-                            <Route path="/admin" component={Admin}></Route>
-                        </Switch>
-                    </TabbarAdmin>) : (<Switch>
-                        <Route path="/signin" render={() => <SingIn/>} />
-                        <Route path="/signup" component={SingUp}></Route>
-                        <Redirect to="/signin" />
-                    </Switch>
-                )
+        let authIsSignin = false    
+        let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
+        let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
+        let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
+        let routes = authIsSignin 
+        ?
+            <Switch>
+                <Route path="/home" exact component={home} />
+                <Route path="/admin" component={admin}/>
+                <Redirect to="/admin"/>
+            </Switch> 
+        
+        : <Switch>
+            <Route path="/" exact component={home} />
+            <Route path="/order" exact component={order} />
+            <Route path="/signin" exact component={SingIn} />
+            <Route path="/signup" exact component={SingUp}/>
+            <Route path="/admin" exact component={SingIn}/>
+            <Redirect to="/"/>  
+        </Switch>
         return (
             <div>
                 <HashRouter>{routes}</HashRouter>
