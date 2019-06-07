@@ -47,11 +47,11 @@ const user_login_fail = (state, action) => {
 export default (state = initialState, action) => {
     switch (action.type) {
         case USER.START:
-            return user_start(state, action)
+            return user_start(state, action.data)
         case USER.LOGIN_SUCCESS:
-            return user_login_success(state, action)
+            return user_login_success(state, action.data)
         case USER.LOGIN_FAIL:
-            return user_login_fail(state, action)
+            return user_login_fail(state, action.data)
         default:
             return state
     }

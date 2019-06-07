@@ -9,17 +9,17 @@ import {
     userLoginFail 
 } from '../store/actions/user';
 
-function* handleUserLogin(action) {
+function* handleUserLogin(actions) {
     // const auth = yield select(state => state.auth.token);
         // console.log("ok")
+        console.log(actions)
     const datareq = {
-        "email": "hacnguyen1412@gmail.com",
-        "password": "1234567",
+        "email": actions.data.email,
+        "password": actions.data.password,
         "store_name": "1"
     }
-    console.log(action)
     try {
-        const data = yield axios.post("http://178.128.62.214:7007/staff/sign_in", datareq)
+        const data = yield axios.post("/api/staff/sign_in", datareq)
         .then(response => {
             console.log(response.data)
             return response.data

@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => ({
     login: function(email, password) {
         dispatch({
             type: USER.LOGIN, 
-            action: {
+            data: {
                 email: email,
                 password: password
             }
