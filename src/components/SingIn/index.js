@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from './../Loading'
 
 class SingIn extends Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class SingIn extends Component {
     }
     handel_click_button_login() {
         let { login } = this.props
-        login(this.state.email, this.state.password)
+        // login(this.state.email, this.state.password)
+        login("hacnguyen1412@gmail.com", "1234567")
     }
 
     handel_change_input_email(event) {

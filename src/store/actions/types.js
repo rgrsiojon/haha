@@ -1,12 +1,5 @@
+
 export const AUTH = {
-    START: "AUTH_START",
-    SUCCESS: "AUTH_SUCCESS",
-    FAIL: "AUTH_FAIL",
-    LOGOUT: "AUTH_LOGOUT"
-}
-
-
-export const USER = {
     //@Start
     START: "START",
     //@LOGIN

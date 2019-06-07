@@ -4,11 +4,11 @@ import App from "./App";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from 'redux-saga'
-import userReducer from "./store/reducers/user";
+import authReducer from "./store/reducers/auth";
 import rootSaga from './middleware/root_saga';
 
 const rootReducer = combineReducers({
-    user: userReducer
+    auth: authReducer
 });
 
 const sagaMiddleware = createSagaMiddleware()
