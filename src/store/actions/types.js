@@ -1,0 +1,19 @@
+export const AUTH = {
+    START: "AUTH_START",
+    SUCCESS: "AUTH_SUCCESS",
+    FAIL: "AUTH_FAIL",
+    LOGOUT: "AUTH_LOGOUT"
+}
+
+
+export const USER = {
+    //@Start
+    START: "START",
+    //@LOGIN
+    LOGIN: "LOGIN",
+    LOGIN_SUCCESS: "LOGIN_SUCCESS",
+    LOGIN_FAIL: "LOGIN_FAIL",
+    //@ REGISTER
+    REGISTER_SUCCESS: "REGISTER_SUCCESS",
+    REGISTER_FAIL: "REGISTER_FAIL"
+}

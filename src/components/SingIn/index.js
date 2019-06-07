@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 
 class SingIn extends Component {
+    constructor(props) {
+        super(props);
+        this.handel_click_button_login = this.handel_click_button_login.bind(this)
+    }
+    handel_click_button_login() {
+        let { login } = this.props
+        login("hacnguyen1412@gmail.com", "1234567")
+    }
     render() {
+        
         return (
             <div>
                 <div className="limiter">
                     <div className="container-login100">
                         <div className="wrap-login100">
-                            <form className="login100-form validate-form">
+                            <div className="login100-form validate-form">
                                 <span className="login100-form-title p-b-26">
                                     Welcome
                                 </span>
@@ -28,7 +37,7 @@ class SingIn extends Component {
                                 <div className="container-login100-form-btn">
                                     <div className="wrap-login100-form-btn">
                                         <div className="login100-form-bgbtn" />
-                                        <button className="login100-form-btn">
+                                        <button className="login100-form-btn" onClick={this.handel_click_button_login}>
                                             Login
                                         </button>
                                     </div>
@@ -41,7 +50,7 @@ class SingIn extends Component {
                                         Sign Up
                                     </a>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

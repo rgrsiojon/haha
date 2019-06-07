@@ -28,7 +28,8 @@
     "react-select": "^2.2.0",
     "react-table": "^6.8.6",
     "redux": "^4.0.1",
-    "redux-saga": "^1.0.2"
+    "redux-saga": "^1.0.2",
+    "universal-cookie": "^4.0.0"
   },
   "scripts": {
     "start-watch": "webpack-dev-server --watch --config ./webpack.config.js --mode development",

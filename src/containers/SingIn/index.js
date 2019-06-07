@@ -1,6 +1,24 @@
 import { connect } from "react-redux";
 import SingIn from './../../components/SingIn/index'
+import { USER } from './../../store/actions/types'
 
-export default connect( state => {
-    auth: ""
-})(SingIn);
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    login: function(email, password) {
+        dispatch({
+            type: USER.LOGIN, 
+            action: {
+                email: email,
+                password: password
+            }
+        })
+    }
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingIn);

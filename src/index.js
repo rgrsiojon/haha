@@ -4,11 +4,11 @@ import App from "./App";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from 'redux-saga'
-import authReducer from "./store/reducers/auth";
-import { helloSaga } from './middleware/root_saga';
+import userReducer from "./store/reducers/user";
+import rootSaga from './middleware/root_saga';
 
 const rootReducer = combineReducers({
-    auth: authReducer
+    user: userReducer
 });
 
 const sagaMiddleware = createSagaMiddleware()
@@ -16,13 +16,11 @@ const store = createStore(
     rootReducer,
     applyMiddleware(sagaMiddleware)
 );
-sagaMiddleware.run(helloSaga)
+sagaMiddleware.run(rootSaga)
 
 const app = (
     <Provider store={store}>
-        {/* <Router> */}
         <App />
-        {/* </Router> */}
     </Provider>
 );
 
