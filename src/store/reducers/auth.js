@@ -3,7 +3,7 @@ import { CardActions } from "@material-ui/core";
 
 //@initialization state
 const initialState = {
-    loading: true,
+    loading: false,
     error: {
         message:""
     },

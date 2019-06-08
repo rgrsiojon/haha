@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 import SingIn from './containers/SingIn'
 import SingUp from './containers/SingUp'
 import Admin from './containers/Admin'
@@ -8,6 +8,7 @@ import TabbarAdmin from './hoc/layout/TabbarAdmin'
 import Tabbar from './containers/Tabbar'
 import Order from './containers/Order'
 import { PAGE } from './Common'
+import Loading from './components/Loading'
 import {
     BrowserRouter as Router,
     Route,
@@ -30,17 +31,21 @@ import './assets/css/font-face.css'
 import './assets/vendor/perfect-scrollbar/perfect-scrollbar.css'
 import './assets/vendor/slick/slick.css'
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 
 class App extends Component {
     render() {
-        let authIsSignin = false    
+        let { loading } = this.props.auth
+        var auth = cookies.get('token')
         let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
-        let routes = authIsSignin 
+        let routes = auth !== undefined
         ?
             <Switch>
-                <Route path="/home" exact component={home} />
+                <Route path="/" exact component={home} />
                 <Route path="/admin" component={admin}/>
                 <Redirect to="/admin"/>
             </Switch> 
@@ -55,11 +60,18 @@ class App extends Component {
         </Switch>
         return (
             <div>
-                <HashRouter>{routes}</HashRouter>
+                {
+                    loading ? <Loading/> : <HashRouter>{routes}</HashRouter>
+                }
+                
             </div>
         );
         
     }
 }
 
-export default App;
+export default connect( state => {
+    return {
+        auth: state.auth
+    }
+})(App);
