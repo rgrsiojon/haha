@@ -51,7 +51,7 @@ class Header extends Component {
                                             <div className="info clearfix">
                                                 <div className="image">
                                                     <a href="#">
-                                                        <img src={avatar} alt="Webshop />
+                                                        <img src={avatar} alt="Webshop" />
                                                     </a>
                                                 </div>
                                                 <div className="content">
