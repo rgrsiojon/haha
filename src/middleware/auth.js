@@ -21,7 +21,7 @@ function* handler_login_with_email(actions) {
     try {
         const data = yield axios.post("/api/staff/sign_in", datareq)
         .then(response => {
-            cookies.set('token', response.data.token, { path: '/' });
+            cookies.set('auth', response.data, { path: '/' });
             return response.data
         })
         yield put(auth_login_success(data))

@@ -34,11 +34,10 @@ import './assets/vendor/slick/slick.css'
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
-
 class App extends Component {
     render() {
         let { loading } = this.props.auth
-        var auth = cookies.get('token')
+        var auth = cookies.get('auth')
         let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>

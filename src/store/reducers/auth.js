@@ -1,4 +1,6 @@
 import { AUTH } from "../actions/types";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 //@initialization state
 const initial_state = {
@@ -6,7 +8,7 @@ const initial_state = {
     error: {
         message:""
     },
-    data: {}
+    data: cookies.get('auth')
 }
 
 //@create mothod
