@@ -1,4 +1,3 @@
-
 export const AUTH = {
     //@Start
     START: "START",
@@ -10,3 +9,12 @@ export const AUTH = {
     REGISTER_SUCCESS: "REGISTER_SUCCESS",
     REGISTER_FAIL: "REGISTER_FAIL"
 }
+
+export const PRODUCT = {
+    START: "START",
+    GET_ALL: "GET_ALL",
+    GET_ALL_SUCCESS: "GET_ALL_SUCCESS",
+    GET_ALL_FAIL: "GET_ALL_FAIL",
+}
+
+

@@ -1,8 +1,7 @@
 import { AUTH } from "../actions/types";
-import { CardActions } from "@material-ui/core";
 
 //@initialization state
-const initialState = {
+const initial_state = {
     loading: false,
     error: {
         message:""
@@ -45,7 +44,7 @@ const user_login_fail = (state, action) => {
 }
 
 //@compare to return
-export default (state = initialState, action) => {
+export default (state = initial_state, action) => {
     switch (action.type) {
         case AUTH.START:
             return user_start(state, action)

@@ -85,7 +85,7 @@ module.exports = {
     hot: true,
     proxy: {
       "/api": {
-      "target": 'http://178.128.62.214:7007',
+      "target": 'http://webshop-api.tk',
       "pathRewrite": { '^/api': '' },
       "changeOrigin": true,
       "secure": false
