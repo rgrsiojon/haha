@@ -19,12 +19,18 @@ class Admin extends Component {
         })
 
         return (
-            <div className="main-content">
+            <div className="main-content"> 
                 <div className="section__content section__content--p30">
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-9">
-                                <h2 className="title-1 m-b-25">Production</h2>
+                                <div className="overview-wrap">
+                                    <h2 className="title-1 m-b-25">Production</h2>
+                                    <button className="au-btn au-btn-icon au-btn--blue">
+                                        <i className="zmdi zmdi-plus" />add item
+                                    </button>
+                                </div>
+                                
                                 <div className="table-responsive table--no-card m-b-40">
                                     <table className="table table-borderless table-striped table-earning">
                                         <thead>
