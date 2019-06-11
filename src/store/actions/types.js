@@ -1,0 +1,20 @@
+export const AUTH = {
+    //@Start
+    START: "START",
+    //@LOGIN
+    LOGIN: "LOGIN",
+    LOGIN_SUCCESS: "LOGIN_SUCCESS",
+    LOGIN_FAIL: "LOGIN_FAIL",
+    //@ REGISTER
+    REGISTER_SUCCESS: "REGISTER_SUCCESS",
+    REGISTER_FAIL: "REGISTER_FAIL"
+}
+
+export const PRODUCT = {
+    START: "START",
+    GET_ALL: "GET_ALL",
+    GET_ALL_SUCCESS: "GET_ALL_SUCCESS",
+    GET_ALL_FAIL: "GET_ALL_FAIL",
+}
+
+
