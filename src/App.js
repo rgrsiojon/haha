@@ -1,23 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import SingIn from './containers/SingIn'
-import SingUp from './containers/SingUp'
-import Admin from './containers/Admin'
-import Home from './containers/Home'
-import TabbarAdmin from './hoc/layout/TabbarAdmin'
-import Tabbar from './containers/Tabbar'
-import Order from './containers/Order'
-import { PAGE } from './Common'
-import Loading from './components/Loading'
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect,
-    HashRouter
-} from "react-router-dom";
 
-import './assets/vendor/bootstrap/css/bootstrap.min.css'
+// import './../../assets/vendor/bootstrap/css/bootstrap.min.css'  
 import './assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css'
 import './assets/fonts/iconic/css/material-design-iconic-font.min.css'
 import './assets/vendor/animate/animate.css'
@@ -32,6 +16,32 @@ import './assets/vendor/perfect-scrollbar/perfect-scrollbar.css'
 import './assets/vendor/slick/slick.css'
 
 import Cookies from 'universal-cookie';
+import SingIn from './containers/SingIn'
+import SingUp from './containers/SingUp'
+import Admin from './containers/Admin'
+import Home from './containers/Home'
+import TabbarAdmin from './hoc/layout/TabbarAdmin'
+import Tabbar from './containers/Tabbar'
+import Order from './containers/Order'
+import { PAGE } from './Common'
+import Loading from './components/Loading'
+
+import DemoHome from  './components/Demo/Home'
+import Checkout from  './components/Demo/Checkout'
+import Cart from  './components/Demo/Cart'
+import Shop from  './components/Demo/Shop'
+import ProductDetails from  './components/Demo/Product-details'
+import Contact from './components/Demo/Contact'
+import Login from  './components/Demo/Login'
+
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+    HashRouter
+} from "react-router-dom";
+
 const cookies = new Cookies();
 
 class App extends Component {
@@ -51,6 +61,14 @@ class App extends Component {
         
         : <Switch>
             <Route path="/" exact component={home} />
+            <Route path="/demo-home" exact component={DemoHome} />
+            <Route path="/checkout" exact component={Checkout} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/shop" exact component={Shop} />
+            <Route path="/product-details" exact component={ProductDetails} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/contact-us" exact component={Contact} />
+
             <Route path="/order" exact component={order} />
             <Route path="/signin" exact component={SingIn} />
             <Route path="/signup" exact component={SingUp}/>
