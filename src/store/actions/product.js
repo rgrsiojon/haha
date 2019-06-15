@@ -25,3 +25,44 @@ export const get_all_product_fail = (error) => {
         error: error
     }
 }
+
+export const create_product = (data) => {
+    return {
+        type: PRODUCT.CREATE_PRODUCT,
+        data: data
+    }
+}
+
+export const create_product_success = (data) => {
+    return {
+        type: PRODUCT.CREATE_PRODUCT_SUCCESS,
+        data: data
+    }
+}
+
+export const create_product_fail = (error) => {
+    return {
+        type: PRODUCT.CREATE_PRODUCT_FAIL,
+        error: error
+    }
+}
+
+export const delete_product_fail = (error) => {
+    return {
+        type: PRODUCT.DELETE_PRODUCT_FAIL,
+        error: error
+    }
+}
+
+export const delete_product_success = (data) => {
+    return {
+        type: PRODUCT.DELETE_PRODUCT_SUCCESS
+    }
+}
+
+export const delete_product = (id) => {
+    return {
+        type: PRODUCT.DELETE_PRODUCT,
+        id: id
+    }
+}

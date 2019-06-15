@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from './../../Loading/index'
 
 class CreateProduct extends Component {
 
@@ -6,7 +7,7 @@ class CreateProduct extends Component {
         super(props);
         this.state = {
             title: "",
-            description: "",
+            descript: "",
             cpu: "",
             ram: 0,
             disk: 0,
@@ -17,6 +18,7 @@ class CreateProduct extends Component {
             price: 0,
             avatar: ""
         }
+        this.input_file_image = React.createRef();
         this.handler_title = this.handler_title.bind(this)
         this.handler_descript = this.handler_descript.bind(this)
         this.handler_cpu = this.handler_cpu.bind(this)
@@ -51,13 +53,13 @@ class CreateProduct extends Component {
 
     handler_ram(e) {
         this.setState({
-            ram: e.target.value
+            ram: parseInt(e.target.value)
         })
     }
 
     handler_disk(e) {
         this.setState({
-            disk: e.target.value
+            disk: parseInt(e.target.value)
         })
     }
 
@@ -81,24 +83,25 @@ class CreateProduct extends Component {
 
     handler_amount(e) {
         this.setState({
-            amount: e.target.value
+            amount: parseInt(e.target.value)
         })
     }
 
     handler_price(e) {
         this.setState({
-            price: e.target.value
+            price: parseInt(e.target.value)
         })
     }
 
     handler_avatar(e) {
         this.setState({
-            avatar: e.target.value
+            avatar: this.input_file_image.current.files[0]
         })
     }
 
     handler_button_submit() {
-        console.log(this.state)
+        let { create_product } = this.props
+        create_product(this.state)
     }
     
     render() {
@@ -161,9 +164,9 @@ class CreateProduct extends Component {
                         </div>
                         <div className="col-12 col-md-9">
                             <select onChange={this.handler_ram} name="select" id="select" className="form-control">
-                                <option value="4Gb">4Gb</option>
-                                <option value="8Gb">8Gb</option>
-                                <option value="16Gb">16Gb</option>
+                                <option value="4">4Gb</option>
+                                <option value="8">8Gb</option>
+                                <option value="16">16Gb</option>
                             </select>
                         </div>
                     </div>
@@ -187,7 +190,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="disabled-input" className=" form-control-label">Amount</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input onChange={this.handler_amount} type="text" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
+                                <input onChange={this.handler_amount} type="number" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
                             </div>
                     </div>
         const price = <div className="row form-group">
@@ -195,7 +198,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="disabled-input" className=" form-control-label">Price</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input onChange={this.handler_price} type="text" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
+                                <input onChange={this.handler_price} type="number" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
                             </div>
                     </div>
         const image = <div className="row form-group">
@@ -203,7 +206,7 @@ class CreateProduct extends Component {
                             <label htmlFor="file-multiple-input" className=" form-control-label">Image</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input onChange={this.handler_avatar} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
+                            <input onChange={this.handler_avatar} ref={this.input_file_image} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
                         </div>
                     </div>
         const submit = <div className="card-footer">
@@ -211,11 +214,30 @@ class CreateProduct extends Component {
                                 <i className="fa fa-dot-circle-o" /> Submit
                             </button>
                         </div>
-
+        let { is_loading, is_created } = this.props.product
         return (
+            
             <div className="main-content">
+                {
+                    is_loading === true ? <Loading></Loading>:
+                
                 <div className="section__content section__content--p30">
                     <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                {
+                                    is_created === true ? <div class="alert alert-success" role="alert">
+                                                            Create product is success
+                                                        </div> : <div></div>
+                                }
+
+                                {
+                                    is_created === false? <div class="alert alert-danger" role="alert">
+                                            Create product to fail, please try again
+                                        </div> : <div></div>
+                                }
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-lg-6">
                                 <div className="card">
@@ -253,8 +275,8 @@ class CreateProduct extends Component {
                         </div>
                     </div>
                 </div>
+                }
             </div>
-
         );
     }
 }

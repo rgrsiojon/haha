@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Header from './../../containers/Admin/Header'
+import './TabbarAdmin.css'
 
 class TabbarAdmin extends Component {
     constructor(props) {
