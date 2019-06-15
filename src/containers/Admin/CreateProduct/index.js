@@ -1,8 +1,8 @@
-import { CreateProduct } from './../../../components/Admin/CreateProduct';
-import { connect } from 'redux';
+import { connect } from "react-redux";
+import CreateProduct from './../../../components/Admin/CreateProduct/index'
 
-export default connect( state => (
-    {
-        auth: ""
+export default connect( state => {
+    return {
+        auth: state.auth
     }
-))(CreateProduct)
+})(CreateProduct);

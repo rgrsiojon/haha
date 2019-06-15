@@ -26,6 +26,9 @@ import Order from './containers/Order'
 import { PAGE } from './Common'
 import Loading from './components/Loading'
 
+// MARK: Product
+import CreateProduct from './containers/Admin/CreateProduct'
+
 import DemoHome from  './components/Demo/Home'
 import Checkout from  './components/Demo/Checkout'
 import Cart from  './components/Demo/Cart'
@@ -50,13 +53,15 @@ class App extends Component {
         var auth = cookies.get('auth')
         let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
+        let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
         let routes = auth !== undefined
         ?
             <Switch>
                 <Route path="/" exact component={home} />
-                <Route path="/admin" component={admin}/>
-                <Redirect to="/admin"/>
+                <Route path="/admin" exact component={admin}/>
+                <Route path="/admin/create-product" exact component={create_product}></Route>
+                {/* <Redirect to="/admin"/> */}
             </Switch> 
         
         : <Switch>
