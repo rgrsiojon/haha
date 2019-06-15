@@ -28,6 +28,7 @@ import Loading from './components/Loading'
 
 // MARK: Product
 import CreateProduct from './containers/Admin/CreateProduct'
+import UpdateProduct from './containers/Admin/UpdateProduct'
 
 import DemoHome from  './components/Demo/Home'
 import Checkout from  './components/Demo/Checkout'
@@ -54,6 +55,7 @@ class App extends Component {
         let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
         let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
+        let update_product = () => <TabbarAdmin> <UpdateProduct/> </TabbarAdmin>
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
         let routes = auth !== undefined
         ?
@@ -61,6 +63,7 @@ class App extends Component {
                 <Route path="/" exact component={home} />
                 <Route path="/admin" exact component={admin}/>
                 <Route path="/admin/create-product" exact component={create_product}></Route>
+                <Route path="/admin/update-product/:id" exact component={update_product}></Route>
                 {/* <Redirect to="/admin"/> */}
             </Switch> 
         

@@ -18,6 +18,11 @@ class Admin extends Component {
         delete_product(id)
     }
 
+    handler_update_product(id) {
+        let { get_product_by_id } = this.props
+        get_product_by_id(id)
+    } 
+
     render() {
         let { is_loading, data, is_deleted } = this.props.product
 
@@ -36,6 +41,12 @@ class Admin extends Component {
                     <td className="text-right">{i.price}</td>
                     <td className="text-center" >{i.store_id}</td>
                     <td className="text-center">
+                        <a href={"/#/admin/update-product/" + i.id}>
+                            <button onClick={()=> {
+                                this.handler_update_product(i.id)
+                            }} type="button" class="btn btn-outline-info">Edit
+                            </button>
+                        </a>
                         <button type="button" className="close" aria-label="Close">
                             <span  onClick={()=> {
                                 this.handler_delete_product(i.id)   
@@ -55,6 +66,18 @@ class Admin extends Component {
                                 {
                                     is_loading !== false ?<Loading></Loading> : <div></div>
                                 }
+                            </div>
+                        </div>
+                        <div className="row m-b-45">
+                            <div className="col-md-12">
+                            <div className="overview-wrap">
+                                <h2 className="title-1">All Product</h2>
+                                <a href="/#/admin/create-product">
+                                    <button className="au-btn au-btn-icon au-btn--blue">
+                                        <i className="zmdi zmdi-plus" />add
+                                    </button>
+                                </a>
+                            </div>
                             </div>
                         </div>
                         <div className="row">

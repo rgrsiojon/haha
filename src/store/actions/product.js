@@ -66,3 +66,45 @@ export const delete_product = (id) => {
         id: id
     }
 }
+
+export const get_product_by_id = (id) => {
+    return {
+        type: PRODUCT.GET_PRODUCT_BY_ID,
+        id: id
+    }
+}
+
+export const get_product_by_id_success = (data) => {
+    return {
+        type: PRODUCT.GET_PRODUCT_BY_ID_SUCCESS,
+        data: data
+    }
+}
+
+export const get_product_by_id_fail = (error) => {
+    return {
+        type: PRODUCT.GET_PRODUCT_BY_ID_FAIL,
+        error: error
+    }
+}
+
+export const update_product = (data) => {
+    return {
+        type: PRODUCT.UPDATE_PRODUCT,
+        data: data
+    }
+}
+
+export const update_product_success = (data) => {
+    return {
+        type: PRODUCT.UPDATE_PRODUCT_SUCCESS,
+        data: data
+    }
+}
+
+export const update_product_fail = (error) => {
+    return {
+        type: PRODUCT.UPDATE_PRODUCT_FAIL,
+        error: error
+    }
+}
