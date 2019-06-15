@@ -19,6 +19,7 @@ import Cookies from 'universal-cookie';
 import SingIn from './containers/SingIn'
 import SingUp from './containers/SingUp'
 import Admin from './containers/Admin'
+import Users from './containers/Admin/Users'
 import Home from './containers/Home'
 import TabbarAdmin from './hoc/layout/TabbarAdmin'
 import Tabbar from './containers/Tabbar'
@@ -54,6 +55,7 @@ class App extends Component {
         var auth = cookies.get('auth')
         let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
+        let users = () => <TabbarAdmin> <Users/> </TabbarAdmin>
         let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
         let update_product = () => <TabbarAdmin> <UpdateProduct/> </TabbarAdmin>
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
@@ -62,9 +64,10 @@ class App extends Component {
             <Switch>
                 <Route path="/" exact component={home} />
                 <Route path="/admin" exact component={admin}/>
-                <Route path="/admin/create-product" exact component={create_product}></Route>
-                <Route path="/admin/update-product/:id" exact component={update_product}></Route>
-                {/* <Redirect to="/admin"/> */}
+                <Route path="/admin/users" exact component={users}/>
+                <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route>
+                <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route>
+                <Redirect to="/admin"/>
             </Switch> 
         
         : <Switch>
