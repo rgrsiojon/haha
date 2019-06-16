@@ -111,6 +111,7 @@ function* handler_get_product_by_id(action) {
 }
 
 function* handler_update_product(action) {
+
     const datareq = {
         "title": action.data.title,
         "description": action.data.descript,

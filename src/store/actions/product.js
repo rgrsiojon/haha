@@ -108,3 +108,24 @@ export const update_product_fail = (error) => {
         error: error
     }
 }
+
+export const add_product_to_cart = (data) => {
+    return {
+        type: PRODUCT.ADD_PRODUCT_TO_CART,
+        data: data
+    }
+}
+
+export const add_product_to_cart_success = (data) => {
+    return {
+        type: PRODUCT.ADD_PRODUCT_TO_CART_SUCCESS,
+        data: data
+    }
+}
+
+export const add_product_to_cart_fail = (error) => {
+    return {
+        type: PRODUCT.ADD_PRODUCT_TO_CART_FAIL,
+        error: error
+    }
+}

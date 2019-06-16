@@ -14,6 +14,7 @@ import './assets/css/theme.css'
 import './assets/css/font-face.css'
 import './assets/vendor/perfect-scrollbar/perfect-scrollbar.css'
 import './assets/vendor/slick/slick.css'
+import './App.css'
 
 import Cookies from 'universal-cookie';
 import SingIn from './containers/SingIn'

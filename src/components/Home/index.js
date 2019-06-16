@@ -3,11 +3,12 @@ import Carousel from './../Carousel'
 import Products from './../Products'
 import Filter from './../Filter'
 import Loading from './../Loading'
+import Alert from './../Alert'
 
 class Home extends Component {
     constructor(props) {
         super(props);
-
+        this.hanler_product = this.hanler_product.bind(this)
     }
 
     componentDidMount() {
@@ -15,11 +16,25 @@ class Home extends Component {
         get_all_products() 
     }
 
+    hanler_product(data) {
+        let { _create_carts } = this.props
+        _create_carts(data)
+    }
+
     render() {
         console.log(this.props)
-        let { is_loading, data } = this.props.product
+        let { is_loading, data } = this.props.product   
+
+        let cart = this.props.carts
+
+        let alert = cart.is_created === true 
+                    ? <Alert class="my--alert--secon">Add product to cart is success</Alert> 
+                    : cart.is_created === false
+                    ? <Alert class="my--alert--deger">Add product to cart is fail</Alert> 
+                    : <div></div>
         return (
             <>
+                {alert}
                 <section id="slider">{/*slider*/}
                     <div className="container">
                         <div className="row">
@@ -45,7 +60,7 @@ class Home extends Component {
                                         is_loading === true ?  <Loading></Loading> : <div></div>   
                                     }
                                     {
-                                        is_loading === false ?  <Products data = {data}></Products> : <div></div>
+                                        is_loading === false ?  <Products onHandlerProduct={this.hanler_product} data = {data}></Products> : <div></div>
                                     }
                                 </div>{/*features_items*/}
                                 <div className="category-tab">{/*category-tab*/}

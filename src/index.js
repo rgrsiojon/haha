@@ -6,11 +6,13 @@ import { Provider } from "react-redux";
 import createSagaMiddleware from 'redux-saga'
 import auth_reducer from "./store/reducers/auth";
 import product_reducer from './store/reducers/product'
+import cart_reducer from './store/reducers/cart'
 import rootSaga from './middleware/root_saga';
 
 const rootReducer = combineReducers({
     auth: auth_reducer,
-    product: product_reducer
+    product: product_reducer,
+    carts: cart_reducer
 });
 
 const sagaMiddleware = createSagaMiddleware()

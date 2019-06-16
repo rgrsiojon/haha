@@ -140,36 +140,48 @@ export default (state = intialization_state, action) => {
     switch (action.type) {
         case PRODUCT.START:
             return product_start(state, action);
+        
+        //@ get all product 
         case PRODUCT.GET_ALL_SUCCESS:
             return get_all_product_success(state, action);
         case PRODUCT.GET_ALL_FAIL:
             return get_all_product_fail(state, action);
         case PRODUCT.GET_ALL:
             return get_all_product(state, action);
+        
+        //@ create product
         case PRODUCT.CREATE_PRODUCT:
             return create_product(state, action);
         case PRODUCT.CREATE_PRODUCT_SUCCESS:
             return create_product_success(state, action);
         case PRODUCT.CREATE_PRODUCT_FAIL:
             return create_product_fail(state, action);
+        
+        //@ delete product
         case PRODUCT.DELETE_PRODUCT:
             return delete_product(state, action);
         case PRODUCT.DELETE_PRODUCT_FAIL:
             return delete_product_fail(state, action)
         case PRODUCT.DELETE_PRODUCT_SUCCESS:
             return delete_product_success(state, action)
+        
+        //@ update product
         case PRODUCT.UPDATE_PRODUCT:
             return update_product(state, action);
         case PRODUCT.UPDATE_PRODUCT_SUCCESS:
             return update_product_success(state, action)
         case PRODUCT.UPDATE_PRODUCT_FAIL:
             return update_product_fail(state, action)
+
+        //@ get produt by id
         case PRODUCT.GET_PRODUCT_BY_ID:
             return get_product_by_id(state, action);
         case PRODUCT.GET_PRODUCT_BY_ID_SUCCESS:
             return get_all_product_success(state, action)
         case PRODUCT.GET_PRODUCT_BY_ID_FAIL:
             return get_product_by_id_fail(state, action)
+
+        //@ add product to carts
         default: 
             return state;
     }
