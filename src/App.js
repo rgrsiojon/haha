@@ -38,7 +38,7 @@ import Cart from  './containers/Cart'
 import Shop from  './components/Shop'
 import ProductDetails from  './components/Product-details'
 import Contact from './components/Contact'
-import Login from  './components/Login'
+import Login from  './containers/Login'
 
 import {
     BrowserRouter as Router,
@@ -107,7 +107,6 @@ class App extends Component {
                 {
                     loading ? <Loading/> : <HashRouter>{routes}</HashRouter>
                 }
-                
             </div>
         );
         

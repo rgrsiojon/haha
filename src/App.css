@@ -43,3 +43,18 @@
         opacity: 0;
     }
 }
+
+.productinfo img {
+    width: 255.48px;
+    height: 255.48px;
+}
+
+.my--recommended-item-control-left {
+    top: 0;
+    transform: translateX(-40px)
+}
+
+.my--recommended-item-control-right {
+    top: 0;
+    transform: translateX(14px)
+}
