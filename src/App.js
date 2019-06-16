@@ -39,6 +39,7 @@ import Shop from  './components/Shop'
 import ProductDetails from  './components/Product-details'
 import Contact from './components/Contact'
 import Login from  './containers/Login'
+import BlogSingle from './containers/Blog-single'
 
 import {
     BrowserRouter as Router,
@@ -67,6 +68,7 @@ class App extends Component {
         let product_details = () => <Header><ProductDetails/></Header>
         let contact_us = () => <Header><Contact/></Header>
         let login = () => <Header><Login/></Header>
+        let blog_single = () => <Header><BlogSingle/></Header>
 
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
         let routes = auth !== undefined
@@ -79,6 +81,7 @@ class App extends Component {
                 <Route path="/product-details" exact component={product_details} />
                 <Route path="/login" exact component={login} />
                 <Route path="/contact-us" exact component={contact_us} />
+                <Route path="/admin/product/macbook" exact component={blog_single}></Route>
 
                 <Route path="/admin" exact component={admin}/>
                 <Route path="/admin/users" exact component={users}/>
@@ -95,6 +98,7 @@ class App extends Component {
             <Route path="/product-details" exact component={ProductDetails} />
             <Route path="/login" exact component={Login} />
             <Route path="/contact-us" exact component={Contact} />
+            <Route path="/admin/product/macbook" exact component={blog_single}></Route>
 
             <Route path="/order" exact component={order} />
             <Route path="/signin" exact component={SingIn} />
