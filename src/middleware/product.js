@@ -19,6 +19,9 @@ import {
     update_product_fail,
     update_product_success,
     product_start,
+    get_top_product,
+    get_top_product_success,
+    get_top_product_fail
 } from './../store/actions/product'
 
 function* handler_get_all_product(action) {
@@ -139,10 +142,26 @@ function* handler_update_product(action) {
     }
 }
 
+function* handler_get_to_product() {
+    // yield put(get_top_product())
+    try {
+        const data = yield axios.get("/api/admin/get_top_10")
+        .then(response => {
+            return response.data
+        }).catch(error => {
+            return error
+        })
+        yield put(get_top_product_success(data))
+    } catch {
+        yield put(get_top_product_fail("Error"))
+    }
+}
+
 export function* productional() {
     yield takeEvery(PRODUCT.GET_ALL, handler_get_all_product)
     yield takeEvery(PRODUCT.CREATE_PRODUCT, handler_create_product)
     yield takeEvery(PRODUCT.DELETE_PRODUCT, handler_delete_product)
     yield takeEvery(PRODUCT.GET_PRODUCT_BY_ID, handler_get_product_by_id)
     yield takeEvery(PRODUCT.UPDATE_PRODUCT, handler_update_product)
+    yield takeEvery(PRODUCT.GET_TOP_PRODUCT, handler_get_to_product)
 }

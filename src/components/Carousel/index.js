@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
+import Loading from './../Loading'
 
 class Carousel extends Component {
+    constructor(props) {
+        super(props)
+    }
+    
     render() {
+        var product = null
+        if (this.props.data !== null) {
+            product =  this.props.data.map((item, index) => {
+                return <div className={`item ${(index === 0)? "active" : ""}`}>
+                            <div className="col-sm-6">
+                                <h1><span>E</span>-MAC</h1>
+                                <h2>{item.title}</h2>
+                                <p>{item.status}</p>
+                                <button type="button" className="btn btn-default get">Get it now</button>
+                            </div>
+                            <div className="col-sm-6">
+                                <img src={item.avatar} className="girl img-responsive" alt />
+                            </div>
+                        </div>
+            })
+        } else {
+            product = <Loading></Loading>
+        }
         return (
             <div id="slider-carousel" className="carousel slide" data-ride="carousel">
                 <ol className="carousel-indicators">
@@ -10,42 +33,7 @@ class Carousel extends Component {
                     <li data-target="#slider-carousel" data-slide-to={2} />
                 </ol>
                 <div className="carousel-inner">
-                    <div className="item active">
-                        <div className="col-sm-6">
-                            <h1><span>E</span>-SHOPPER</h1>
-                            <h2>Free E-Commerce Template</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" className="btn btn-default get">Get it now</button>
-                        </div>
-                        <div className="col-sm-6">
-                            <img src="images/home/girl1.jpg" className="girl img-responsive" alt />
-                            <img src="images/home/pricing.png" className="pricing" alt />
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="col-sm-6">
-                            <h1><span>E</span>-SHOPPER</h1>
-                            <h2>100% Responsive Design</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" className="btn btn-default get">Get it now</button>
-                        </div>
-                        <div className="col-sm-6">
-                            <img src="images/home/girl2.jpg" className="girl img-responsive" alt />
-                            <img src="images/home/pricing.png" className="pricing" alt />
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="col-sm-6">
-                            <h1><span>E</span>-SHOPPER</h1>
-                            <h2>Free Ecommerce Template</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                            <button type="button" className="btn btn-default get">Get it now</button>
-                        </div>
-                        <div className="col-sm-6">
-                            <img src="images/home/girl3.jpg" className="girl img-responsive" alt />
-                            <img src="images/home/pricing.png" className="pricing" alt />
-                        </div>
-                    </div>
+                    {product}
                 </div>
                 <a href="#slider-carousel" className="left control-carousel hidden-xs" data-slide="prev">
                     <i className="fa fa-angle-left" />

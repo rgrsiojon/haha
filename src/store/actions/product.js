@@ -129,3 +129,23 @@ export const add_product_to_cart_fail = (error) => {
         error: error
     }
 }
+
+export const get_top_product = () => {
+    return {
+        type: PRODUCT.GET_TOP_PRODUCT
+    }
+}
+
+export const get_top_product_success = (data) => {
+    return {
+        type: PRODUCT.GET_TOP_PRODUCT_SUCCESS,
+        data: data
+    }
+}
+
+export const get_top_product_fail = (error) => {
+    return {
+        type: PRODUCT.GET_TOP_PRODUCT_FAIL,
+        error: error
+    }
+}

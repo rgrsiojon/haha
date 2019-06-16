@@ -5,6 +5,7 @@ const intialization_state = {
     is_created: null,
     is_deleted: null,
     is_updated: null,
+    product_top: null,
     data: null,
     error: null
 }
@@ -135,6 +136,28 @@ function get_product_by_id_fail(state, action) {
     }
 }
 
+function get_top_product(state, action) {
+    return {
+        ...state,
+        is_loading: true
+    }
+}
+
+function get_top_product_sucess(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        product_top: action.data
+    }
+}
+
+function get_top_product_fail(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        error: action.error
+    }
+}
 
 export default (state = intialization_state, action) => {
     switch (action.type) {
@@ -177,11 +200,17 @@ export default (state = intialization_state, action) => {
         case PRODUCT.GET_PRODUCT_BY_ID:
             return get_product_by_id(state, action);
         case PRODUCT.GET_PRODUCT_BY_ID_SUCCESS:
-            return get_all_product_success(state, action)
+            return get_product_by_id_success(state, action)
         case PRODUCT.GET_PRODUCT_BY_ID_FAIL:
             return get_product_by_id_fail(state, action)
 
-        //@ add product to carts
+        //@ get top product
+        case PRODUCT.GET_TOP_PRODUCT:
+            return get_top_product(state, action)
+        case PRODUCT.GET_TOP_PRODUCT_SUCCESS:
+            return get_top_product_sucess(state, action)
+        case PRODUCT.GET_TOP_PRODUCT_FAIL:
+            return get_top_product_fail(state, action)
         default: 
             return state;
     }

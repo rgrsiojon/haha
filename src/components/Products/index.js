@@ -52,8 +52,6 @@ class Products extends Component {
         // var data_demo = null
         
         if(this.props.data !== null) {
-            console.log(this.props.data.slice(0, 9))
-            console.log(this.props.data)
             switch (this.state.page) {
                 case 1:
                     
