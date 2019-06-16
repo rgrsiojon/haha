@@ -34,7 +34,7 @@ import UpdateProduct from './containers/Admin/UpdateProduct'
 
 import Header from './hoc/layout/Header'
 import Checkout from  './components/Checkout'
-import Cart from  './components/Cart'
+import Cart from  './containers/Cart'
 import Shop from  './components/Shop'
 import ProductDetails from  './components/Product-details'
 import Contact from './components/Contact'

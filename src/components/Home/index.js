@@ -22,9 +22,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props)
         let { is_loading, data } = this.props.product   
-
         let cart = this.props.carts
 
         let alert = cart.is_created === true 

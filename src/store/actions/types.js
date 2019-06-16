@@ -39,8 +39,14 @@ export const PRODUCT = {
 
 export const CART = {
 
+    //@ create cart
     CREATE_CART: "CREATE_CART",
     CREATE_CART_SUCCESS: "CREATE_CART_SUCCESS",
     CREATE_CART_FAIL: "CREATE_CART_FAIL",
+
+    //@ getall cart
+    GET_ALL_CART: "GET_ALL_CART",
+    GET_ALL_CART_SUCCESS: "GET_ALL_CART_SUCCESS",
+    GET_ALL_CART_FAIL: "GET_ALL_CART_FAIL",
 }
 
