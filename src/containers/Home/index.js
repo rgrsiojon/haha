@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import Home from './../../components/Home'
-import { get_all_product } from './../../store/actions/product'
+import Home from '../../components/Home'
+// import { get_all_product } from './../../store/actions/product'
 
 const map_state_to_props = state => ({
     product: state.product

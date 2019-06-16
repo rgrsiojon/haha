@@ -31,13 +31,13 @@ import Loading from './components/Loading'
 import CreateProduct from './containers/Admin/CreateProduct'
 import UpdateProduct from './containers/Admin/UpdateProduct'
 
-import DemoHome from  './components/Demo/Home'
-import Checkout from  './components/Demo/Checkout'
-import Cart from  './components/Demo/Cart'
-import Shop from  './components/Demo/Shop'
-import ProductDetails from  './components/Demo/Product-details'
-import Contact from './components/Demo/Contact'
-import Login from  './components/Demo/Login'
+import Header from './hoc/layout/Header'
+import Checkout from  './components/Checkout'
+import Cart from  './components/Cart'
+import Shop from  './components/Shop'
+import ProductDetails from  './components/Product-details'
+import Contact from './components/Contact'
+import Login from  './components/Login'
 
 import {
     BrowserRouter as Router,
@@ -53,16 +53,32 @@ class App extends Component {
     render() {
         let { loading } = this.props.auth
         var auth = cookies.get('auth')
-        let home = () => <Tabbar page = {PAGE.HOME}><Home/></Tabbar>
+        //@ Admin
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
-        let users = () => <TabbarAdmin> <Users/> </TabbarAdmin>
         let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
         let update_product = () => <TabbarAdmin> <UpdateProduct/> </TabbarAdmin>
+        let users = () => <TabbarAdmin> <Users/> </TabbarAdmin>
+        //@ Guest 
+        let home = () => <Header><Home/></Header>
+        let checkout = () => <Header><Checkout/></Header>
+        let cart = () => <Header><Cart/></Header>
+        let shop = () => <Header><Shop/></Header>
+        let product_details = () => <Header><ProductDetails/></Header>
+        let contact_us = () => <Header><Contact/></Header>
+        let login = () => <Header><Login/></Header>
+
         let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
         let routes = auth !== undefined
         ?
             <Switch>
                 <Route path="/" exact component={home} />
+                <Route path="/checkout" exact component={checkout} />
+                <Route path="/cart" exact component={cart} />
+                <Route path="/shop" exact component={shop} />
+                <Route path="/product-details" exact component={product_details} />
+                <Route path="/login" exact component={login} />
+                <Route path="/contact-us" exact component={contact_us} />
+
                 <Route path="/admin" exact component={admin}/>
                 <Route path="/admin/users" exact component={users}/>
                 <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route>
@@ -72,7 +88,6 @@ class App extends Component {
         
         : <Switch>
             <Route path="/" exact component={home} />
-            <Route path="/demo-home" exact component={DemoHome} />
             <Route path="/checkout" exact component={Checkout} />
             <Route path="/cart" exact component={Cart} />
             <Route path="/shop" exact component={Shop} />

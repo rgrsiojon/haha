@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './../Loading'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Admin extends Component {
 
@@ -72,11 +73,11 @@ class Admin extends Component {
                             <div className="col-md-12">
                             <div className="overview-wrap">
                                 <h2 className="title-1">All Product</h2>
-                                <a href="/#/admin/create-product">
+                                <Link to="/admin/product/macbook/create-product">
                                     <button className="au-btn au-btn-icon au-btn--blue">
                                         <i className="zmdi zmdi-plus" />add
                                     </button>
-                                </a>
+                                </Link>
                             </div>
                             </div>
                         </div>
