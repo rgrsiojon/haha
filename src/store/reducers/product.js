@@ -5,7 +5,7 @@ const intialization_state = {
     is_created: null,
     is_deleted: null,
     is_updated: null,
-    data: {},
+    data: null,
     error: null
 }
 
@@ -99,7 +99,7 @@ function update_product(state, action) {
 function update_product_success(state, action) {
     return {
         ...state,
-        is_updated: false,
+        is_updated: true,
         data: action.data
     }
 }

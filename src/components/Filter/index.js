@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 class Filter extends Component {
     constructor(props) {
@@ -11,35 +10,12 @@ class Filter extends Component {
 
     }
 
-    componentDidMount() {
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
-    componentWillUnmount() {
-
-    }
 
     render() {
         return (
             <div className="filter--name navbar-sidebar">
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Thương hiệu</h2>
+                    <h2 className="title text-center">Thương hiệu</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -52,7 +28,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Loại</h2>
+                    <h2 class="title text-center">Loại</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -71,7 +47,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Năm sản xuất</h2>
+                    <h2 class="title text-center">Năm sản xuất</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -99,7 +75,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Trạng thái</h2>
+                    <h2 class="title text-center">Trạng thái</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -112,7 +88,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Kích thước</h2>
+                    <h2 class="title text-center">Kích thước</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -134,7 +110,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">Touch bar</h2>
+                    <h2 class="title text-center">Touch bar</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -147,7 +123,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">SSD</h2>
+                    <h2 class="title text-center">SSD</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -172,7 +148,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">RAM</h2>
+                    <h2 class="title text-center">RAM</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -194,7 +170,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">ROM</h2>
+                    <h2 class="title text-center">ROM</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -216,7 +192,7 @@ class Filter extends Component {
                 </div>
 
                 <div className="col-md-12 m-t-25">
-                    <h2 class="title-3">CPU</h2>
+                    <h2 class="title text-center">CPU</h2>
                     <div className="line-seprate welcome2"></div>
                     <ul className="list-unstyled navbar__list">
                         <li className="active has-sub m-t-14">
@@ -237,9 +213,5 @@ class Filter extends Component {
         );
     }
 }
-
-Filter.propTypes = {
-
-};
 
 export default Filter;

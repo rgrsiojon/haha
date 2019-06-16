@@ -42,7 +42,7 @@ class Admin extends Component {
                     <td className="text-right">{i.price}</td>
                     <td className="text-center" >{i.store_id}</td>
                     <td className="text-center">
-                        <a href={"/#/admin/update-product/" + i.id}>
+                        <a href={"/#/admin/product/macbook/update-product/" + i.id}>
                             <button onClick={()=> {
                                 this.handler_update_product(i.id)
                             }} type="button" class="btn btn-outline-info">Edit

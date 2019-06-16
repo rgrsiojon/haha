@@ -37,29 +37,7 @@ class Header extends Component {
                             <div className="row">
                                 <div className="col-sm-4">
                                     <div className="logo pull-left">
-                                        <a href="index.html"><img src="images/home/logo.png" alt /></a>
-                                    </div>
-                                    <div className="btn-group pull-right">
-                                        <div className="btn-group">
-                                            <button type="button" className="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                                USA
-                        <span className="caret" />
-                                            </button>
-                                            <ul className="dropdown-menu">
-                                                <li><a href="#">Canada</a></li>
-                                                <li><a href="#">UK</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="btn-group">
-                                            <button type="button" className="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                                DOLLAR
-                        <span className="caret" />
-                                            </button>
-                                            <ul className="dropdown-menu">
-                                                <li><a href="#">Canadian Dollar</a></li>
-                                                <li><a href="#">Pound</a></li>
-                                            </ul>
-                                        </div>
+                                        <h1><span>E</span>-Mac</h1>     
                                     </div>
                                 </div>
                                 <div className="col-sm-8">

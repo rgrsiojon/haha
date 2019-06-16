@@ -111,7 +111,6 @@ function* handler_get_product_by_id(action) {
 }
 
 function* handler_update_product(action) {
-
     const datareq = {
         "title": action.data.title,
         "description": action.data.descript,
@@ -124,7 +123,7 @@ function* handler_update_product(action) {
         "amount": action.data.amount,
         "price": action.data.price
     }
-    
+
     try {
 
         const data_updated = yield axios.put(`/api/store/1/product/${action.data.id}`, datareq)
