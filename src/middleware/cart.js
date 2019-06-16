@@ -8,6 +8,7 @@ import {
     create_cart,
     create_cart_success,
     create_cart_fail,
+    create_cart_end,
     get_all_cart,
     get_all_cart_fail,
     get_all_cart_success
@@ -41,6 +42,7 @@ function* handler_get_all_cart() {
             return error
         })
         yield put(get_all_cart_success(data))
+        yield put(create_cart_end())
     } catch {
         yield put(get_all_cart_fail("Error"))
     }

@@ -19,7 +19,6 @@ function create_cart_succes(state, action) {
     return {
         ...state,
         is_loading: false,
-        data: action.data,
         is_created: true
     }
 }
@@ -30,6 +29,13 @@ function create_cart_fail(state, action) {
         is_loading: false,
         error: action.error,
         is_created: false
+    }
+}
+
+function create_cart_end(state, action) {
+    return {
+        ...state,
+        is_created: null
     }
 }
 
@@ -65,6 +71,8 @@ export default (state = initialization, action) => {
             return create_cart_succes(state, action)
         case CART.CREATE_CART_FAIL:
             return create_cart_fail(state, action)
+        case CART.CREATE_CART_END:
+            return create_cart_end(state, action)
         //@ get all cart
         case CART.GET_ALL_CART:
             return get_all_cart(state, action)

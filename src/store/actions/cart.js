@@ -21,6 +21,12 @@ export const create_cart_fail = (error) => {
     }
 }
 
+export const create_cart_end = () => {
+    return {
+        type: CART.CREATE_CART_END
+    }
+}
+
 export const get_all_cart = () => {
     return {
         type: CART.GET_ALL_CART
@@ -40,3 +46,4 @@ export const get_all_cart_fail = (error) => {
         error: error
     }
 }
+

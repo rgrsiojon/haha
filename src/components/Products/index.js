@@ -12,7 +12,7 @@ class Products extends Component {
     }   
     render() {
         var data_product = null
-        if(this.props.data) {
+        if(this.props.data !== null) {
             data_product = this.props.data.map(i => {
                 return <div className="col-sm-4">
                     <div className="product-image-wrapper">
@@ -48,7 +48,7 @@ class Products extends Component {
             })
 
             return (
-                    <>
+                <>
                     {data_product}
                 </>
             )
