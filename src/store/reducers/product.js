@@ -8,6 +8,7 @@ const intialization_state = {
     product_top: null,
     comment: null,
     product: null,
+    created_comment: null,
     data: null,
     error: null
 }
@@ -184,6 +185,29 @@ function get_comment_of_product_fail(state, action) {
     }
 }
 
+function create_comment_of_product(state, action) {
+    return {
+        ...state,
+        is_loading: true
+    }
+}
+
+function create_comment_of_product_sucess(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        created_comment: true
+    }
+}
+
+function create_comment_of_product_fail(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        created_comment: false
+    }
+}
+
 export default (state = intialization_state, action) => {
     switch (action.type) {
         case PRODUCT.START:
@@ -244,6 +268,14 @@ export default (state = intialization_state, action) => {
             return get_comment_of_product_sucess(state, action)
         case PRODUCT.GET_COMMENT_BY_ID_FAIL:
             return get_comment_of_product_fail(state, action)
+        
+        //@ Create commen for product 
+        case PRODUCT.CREATE_COMMENT_FOR_PRODUCT:
+            return create_comment_of_product(state, action)
+        case PRODUCT.CREATE_COMMENT_FOR_PRODUCT_SUCCESS:
+            return create_comment_of_product_sucess(state, action)
+        case PRODUCT.CREATE_COMMENT_FOR_PRODUCT_FAIL:
+            return create_comment_of_product_fail(state, action)
         default: 
             return state;
     }

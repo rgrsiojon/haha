@@ -170,3 +170,24 @@ export const get_comment_of_product_fail = (error) => {
         error: error
     }
 }
+
+export const create_comment_of_product = (data) => {
+    return {
+        type: PRODUCT.CREATE_COMMENT_FOR_PRODUCT,
+        data: data
+    }
+}
+
+export const create_comment_of_product_success = (data) => {
+    return {
+        type: PRODUCT.CREATE_COMMENT_FOR_PRODUCT_SUCCESS,
+        data: data
+    }
+}
+
+export const create_comment_of_product_fail = (error) => {
+    return {
+        type: PRODUCT.CREATE_COMMENT_FOR_PRODUCT_FAIL,
+        error: error
+    }
+}
