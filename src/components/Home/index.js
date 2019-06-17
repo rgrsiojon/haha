@@ -285,7 +285,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.search.content)
         let { is_loading, data, product_top, is_created } = this.props.product
         let { _create_cart_end } = this.props
         let cart = this.props.carts

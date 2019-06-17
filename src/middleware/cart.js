@@ -11,7 +11,9 @@ import {
     create_cart_end,
     get_all_cart,
     get_all_cart_fail,
-    get_all_cart_success
+    get_all_cart_success,
+    delete_fail,
+    delete_success
 } from './../store/actions/cart'
 
 function* handler_create_cart(action) {
@@ -48,8 +50,24 @@ function* handler_get_all_cart() {
     }
 }
 
+function* handler_delete_cart(action) {
+    try {
+        const data = yield axios.delete(`/api/auth/cart/${action.id}`)
+        .then(response => {
+            return response.data
+        }).catch(error => {
+            return error
+        })
+
+        yield put(delete_success(data))
+    } catch {
+        yield put(delete_fail("Error"))
+    }
+}
+
 export function* cart_of_production() {
     yield takeEvery(CART.CREATE_CART, handler_create_cart)
     yield takeEvery(CART.GET_ALL_CART, handler_get_all_cart)
+    yield takeEvery(CART.DELETE_CART, handler_delete_cart)
 
 }

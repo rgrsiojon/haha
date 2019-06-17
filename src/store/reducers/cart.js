@@ -1,10 +1,10 @@
 import { CART } from './../actions/types'
-import { defaultCipherList } from 'constants';
 
 const initialization = {
     is_loading: null,
     data: null,
     is_created: null,
+    is_deleted: null,
     error: null
 }
 
@@ -35,7 +35,8 @@ function create_cart_fail(state, action) {
 function create_cart_end(state, action) {
     return {
         ...state,
-        is_created: null
+        is_created: null,
+        is_deleted: null
     }
 }
 
@@ -62,6 +63,29 @@ function get_all_cart_fail(state, action) {
     }
 }
 
+function delete_cart(state, action) {
+    return {
+        ...state, 
+        is_loading: true,
+    }
+}
+
+function delete_cart_success(state, action) {
+    return {
+        ...state, 
+        is_loading: false,
+        is_deleted: true
+    }
+}
+
+function delete_cart_fail(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        error: action.error
+    }
+}
+
 export default (state = initialization, action) => {
     switch (action.type) {
         //@ Create cart
@@ -80,6 +104,13 @@ export default (state = initialization, action) => {
             return get_all_cart_success(state, action)
         case CART.GET_ALL_CART_FAIL:
             return get_all_cart_fail(state, action)
+        //@ get all cart
+        case CART.DELETE_CART:
+            return delete_cart(state, action)
+        case CART.DELETE_SUCCESS:
+            return delete_cart_success(state, action)
+        case CART.DELETE_FAIL:
+            return delete_cart_fail(state, action)
         default:
             return state
     }

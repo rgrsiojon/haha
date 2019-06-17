@@ -62,6 +62,10 @@ export const CART = {
     GET_ALL_CART: "GET_ALL_CART",
     GET_ALL_CART_SUCCESS: "GET_ALL_CART_SUCCESS",
     GET_ALL_CART_FAIL: "GET_ALL_CART_FAIL",
+    //@ delete cart
+    DELETE_CART: "DELETE_CART",
+    DELETE_SUCCESS: "DELETE_SUCCESS",
+    DELETE_FAIL: "DELETE_FAIL",
 }
 export const ORDER = {
     //@CREATE order

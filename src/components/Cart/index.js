@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './../Loading'
+import Alert from './../Alert'
 
 class Cart extends Component {
     constructor(props) {
@@ -20,6 +21,13 @@ class Cart extends Component {
         this.setState({
             total: total
         })
+    }
+
+    handler_delete_cart(id) {
+        let { get_all_carts, get_all_products, _delete_cart_by_id } = this.props
+        _delete_cart_by_id(id)
+        get_all_carts()
+        get_all_products()
     }
 
     render() {
@@ -60,7 +68,9 @@ class Cart extends Component {
                     <p className="cart_total_price"> {item[0].price * carts.data[index].amount} VND</p>
                 </td>
                 <td className="cart_delete">
-                    <a className="cart_quantity_delete" href><i className="fa fa-times" /></a>
+                    <a onClick={() => {
+                        this.handler_delete_cart(carts.data[index].id)
+                    }} className="cart_quantity_delete" href><i className="fa fa-times" /></a>
                 </td>
             </tr>
         }) : <Loading></Loading>
@@ -75,8 +85,18 @@ class Cart extends Component {
             this.handler_total(total)
         }
 
+        let { _create_end } = this.props
+        let cart = this.props.carts
+        let alert_cart = cart.is_loading === true
+            ? <Alert class="my--alert--deger">Deleted product</Alert>
+            : <div></div>
+        if (cart.is_deleted === true) {
+            _create_end()
+        }
+
         return (
             <>
+                {alert_cart}
                 <section id="cart_items">
                     <div className="container">
                         <div className="breadcrumbs">

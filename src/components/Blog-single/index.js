@@ -13,8 +13,8 @@ class Blog extends Component {
         let product = this.props.data
         let data_hight_light = this.props.data_hight_light
 
-        let product_hight_light = data_hight_light !== null ? data_hight_light.slice(0, 3).map(item => {
-            return <Link onClick={()=>{
+        let product_hight_light = data_hight_light !== null ? data_hight_light.slice(0, 3).map((item, index) => {
+            return <Link key={index} onClick={()=>{
                 this.props.handler_click_link(item.id)
             }} to={`/product/macbook/${item.id}`}>
                 <img src={item.avatar} width="85px" alt="product hight light" />
@@ -58,7 +58,9 @@ class Blog extends Component {
                                 <span>{product.price} VND</span>
                                 <label>Quantity:</label>
                                 <input type="text" defaultValue={1} />
-                                <button type="button" className="btn btn-fefault cart">
+                                <button onClick={() => {
+                                    this.props.proccess_create_cart(product)
+                                }} type="button" className="btn btn-fefault cart">
                                     <i className="fa fa-shopping-cart" />
                                     Add to cart
                         </button>
@@ -68,6 +70,8 @@ class Blog extends Component {
                             <p><b>Title:</b> {product.title}</p>
                             <p><b>Cpu:</b> {product.cpu}</p>
                             <p><b>Gpu:</b> {product.gpu}</p>
+                            <p><b>Ram:</b> {product.ram} Gb</p>
+                            <p><b>Disk:</b> {product.disk} Gb</p>
                             <p><b>Condition:</b> {product.status}</p>
                             <p><b>Brand:</b> E-Mac</p>
                             <a href><img src="images/product-details/share.png" className="share img-responsive" alt /></a>
@@ -99,6 +103,7 @@ class BlogSingle extends Component {
         this.handler_change_content = this.handler_change_content.bind(this)
         this.reload = this.reload.bind(this)
         this.handler_comment = this.handler_comment.bind(this)
+        this.handler_create_cart = this.handler_create_cart.bind(this)
 
     }
 
@@ -172,6 +177,11 @@ class BlogSingle extends Component {
         this.reload(this.props.id)
     }
 
+    handler_create_cart(product) {
+        let { _create_carts } = this.props
+        _create_carts(product)
+    }
+
     render() {
         let { is_loading, product, data, product_top, comment, created_comment, data_comment } = this.props.product
         let { _create_comment_end } = this.props
@@ -201,15 +211,24 @@ class BlogSingle extends Component {
             </div>
         }) : <div></div>
         let alert = data_comment !== null
-            ? <Alert className="my--alert--secon">Add product to cart is success</Alert>
+            ? <Alert className="my--alert--secon">Created comment</Alert>
             : <div></div>
         if (created_comment === true) {
             _create_comment_end()
         }
         
+        let { _create_cart_end } = this.props
+        let cart = this.props.carts
+        let alert_cart = cart.is_loading === true
+            ? <Alert class="my--alert--secon">Add product to cart is success</Alert>
+            : <div></div>
+        if (cart.is_created === true) {
+            _create_cart_end()
+        }
+
         return (
-            <div>
-                {alert}
+            <>
+                {alert} {alert_cart}
                 <section>
                     <div className="container">
                         <div className="row">
@@ -234,7 +253,7 @@ class BlogSingle extends Component {
                                 {
                                     product !== null
                                         ?
-                                        <Blog data={product} data_hight_light={product_top} handler_click_link={this.reload}></Blog>
+                                        <Blog proccess_create_cart={this.handler_create_cart} data={product} data_hight_light={product_top} handler_click_link={this.reload}></Blog>
                                         : <Loading></Loading>
                                 }
 
@@ -293,7 +312,7 @@ class BlogSingle extends Component {
                                                     <label>Bình luận </label>
                                                 </div>
                                                 <textarea onChange={this.handler_change_content} style={{ backgroundColor: "#ffffff" }} name="message" rows={11} defaultValue={""} />
-                                                <button onClick={this.handler_comment} className="btn btn-primary" href> Bình luận</button>
+                                                <button onClick={this.handler_comment} className="btn btn-primary" href> Gửi bình luận</button>
                                             </div>
                                         </div>
                                     </div>
@@ -302,7 +321,7 @@ class BlogSingle extends Component {
                         </div>
                     </div>
                 </section>
-            </div>
+            </>
         )
     }
 }

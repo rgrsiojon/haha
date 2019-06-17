@@ -47,3 +47,24 @@ export const get_all_cart_fail = (error) => {
     }
 }
 
+export const delete_cart = (id) => {
+    return {
+        type: CART.DELETE_CART,
+        id: id
+    }
+}
+
+export const delete_success = (data) => {
+    return {
+        type: CART.DELETE_SUCCESS,
+        data: data
+    }
+}
+
+export const delete_fail = (error) => {
+    return {
+        type: CART.DELETE_FAIL,
+        error: error
+    }
+}
+

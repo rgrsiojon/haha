@@ -8,6 +8,11 @@ import {
     create_comment_of_product_end
 } from './../../store/actions/product'
 
+import { 
+    create_cart,
+    create_cart_end
+} from './../../store/actions/cart'
+
 const map_state_to_props = state => ({
     auth: state.auth,
     product: state.product,
