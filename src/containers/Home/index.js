@@ -5,7 +5,8 @@ import { create_cart, create_cart_end } from './../../store/actions/cart'
 
 const map_state_to_props = state => ({
     product: state.product,
-    carts: state.carts
+    carts: state.carts,
+    search: state.search
 })
 
 const map_dispatch_to_props = dispatch => ({

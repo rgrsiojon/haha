@@ -52,10 +52,6 @@ class Products extends Component {
         var data_product = null
         
         if(this.props.data !== null) {
-            switch (this.state.page) {
-                case 1:
-                    
-            }
             let pages = parseInt(parseInt(this.props.data.length) / 9)
             if(this.state.total_page !== pages) {
                 this.handler_total(pages)

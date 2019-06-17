@@ -63,3 +63,9 @@
     position: relative;
     background-color: white;
 }
+
+.commnets 
+ .media-object {
+    margin-right: 15px;
+    max-width: 80px;
+}

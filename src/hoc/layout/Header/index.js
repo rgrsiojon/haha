@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Footer from './../Footer'
+import { connect } from "react-redux";
+import { handler_search } from './../../../store/actions/search'
+
 
 class Header extends Component {
+    constructor(props) {
+        super(props)
+        this.handler_change_input_search = this.handler_change_input_search.bind(this)
+    }
+
+    handler_change_input_search(e) {
+        let { _handler_search } = this.props
+        _handler_search(e.target.value)
+    }
+
     render() {
         return (
             <div>
@@ -97,13 +110,13 @@ class Header extends Component {
                                 </div>
                                 <div className="col-sm-3">
                                     <div className="search_box pull-right">
-                                        <input type="text" placeholder="Search" />
+                                        <input onChange={this.handler_change_input_search} type="text" placeholder="Search" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>{/*/header-bottom*/}
-                </header>{/*/header*/}
+                    </div>
+                </header>
                 {this.props.children}
                 <Footer></Footer>
             </div>
@@ -111,4 +124,19 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const map_state_to_props = state => ({
+    product: state.product,
+    carts: state.carts,
+    search: state.search
+})
+
+const map_dispatch_to_props = dispatch => ({
+    _handler_search: function(content) {
+        dispatch(handler_search(content))
+    }
+})
+
+export default connect(
+    map_state_to_props,
+    map_dispatch_to_props
+)(Header);

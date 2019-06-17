@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Loading from './../Loading'
+import Recommended from './../Recommended'
 
 class Blog extends Component {
     constructor(props) {
@@ -8,12 +9,11 @@ class Blog extends Component {
 
     render() {
         let product = this.props.data
-        console.log(product)
         return (
             <div className="blog-post-area">
-                <h2 className="title text-center">Latest From our Blog</h2>
+                <h2 className="title text-center">{product.title}</h2>
                 <div className="single-blog-post">
-                    <h3>Girls Pink T Shirt arrived in store</h3>
+                    <h3>{product.status}</h3>
                     <div className="post-meta">
                         <ul>
                             <li><i className="fa fa-user" /> Mac</li>
@@ -26,10 +26,12 @@ class Blog extends Component {
                             <i className="fa fa-star-half-o" />
                         </span>
                     </div>
-                    <a href>
-                        <img src={product.avatar} alt />
-                    </a>
-                    <p>{product.description}</p> <br />
+                    <div className="row">
+                        <div className="col-md-12 text-center m-b-30" style={{backgroundColor: "#ffffff"}}>
+                            <img src={product.avatar} alt />
+                        </div>
+                    </div>
+                    <p className="">{product.description}</p> <br />
                     <div className="pager-area">
                         <ul className="pager pull-right">
                             <li><a href="#">Pre</a></li>
@@ -45,15 +47,80 @@ class Blog extends Component {
 class BlogSingle extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            page: 1,
+            total_page: 0
+        }
+        this.handler_next = this.handler_next.bind(this)
+        this.handler_prev = this.handler_prev.bind(this)
+        this.handler_total = this.handler_total.bind(this)
     }
 
     componentDidMount() {
-        let { _get_product_by_id } = this.props
+        let { _get_product_by_id, _get_top_product, _get_comment_of_product } = this.props
         _get_product_by_id(this.props.id)
+        _get_top_product()
+        _get_comment_of_product(this.props.id)
+    }
+
+    handler_prev() {
+        if(this.state.page === 1) {
+            return false
+        } else {
+            this.setState(state => {
+                return {
+                    page: state.page - 1
+                }
+            })
+        }
+    }
+
+    handler_next() {
+        if(this.state.page > this.state.total_page) {
+            return false
+        } else {
+            this.setState(state => {
+                return {
+                    page: state.page + 1
+                }
+            })
+        }
+    }
+
+    handler_total(pages){
+        this.setState({
+            total_page: pages
+        })
     }
 
     render() {
-        let { is_loading, product } = this.props.product
+        let { is_loading, product, data, product_top, comment } = this.props.product
+        let pagesComment = comment !== null ? parseInt(parseInt(comment.length) / 3) : 0
+            if(this.state.total_page !== pagesComment) {
+                this.handler_total(pagesComment)
+            }
+        let list_comment = comment !== null ? comment.slice(this.state.page * 3 - 3, this.state.page * 3).map((i, index) => {
+            return <div key={index} className="media commnets">
+                <a className="pull-left" href="#">
+                    <img width="80px" className="media-object" src="images/User_Circle.png" alt />
+                </a>
+                <div className="media-body">
+                    <h4 className="media-heading">{i.user_name}</h4>
+                    <p>{i.content}</p>
+                    <div className="blog-socials">
+                        <ul>
+                            <li><a href><i className="fa fa-facebook" /></a></li>
+                            <li><a href><i className="fa fa-twitter" /></a></li>
+                            <li><a href><i className="fa fa-dribbble" /></a></li>
+                            <li><a href><i className="fa fa-google-plus" /></a></li>
+                        </ul>
+                        <a className="btn btn-primary" href>Other Posts</a>
+                    </div>
+                </div>
+
+            </div>
+        }): <div></div>
+        console.log(this.props.product)
         return (
             <div>
                 <section>
@@ -83,7 +150,26 @@ class BlogSingle extends Component {
                                     <Blog data={product}></Blog>
                                     : <Loading></Loading>
                                 }
-                                
+
+                                <div className="recommended_items">{/*recommended_items*/}
+                                    <h2 className="title text-center">Sản phẩm liên quan</h2>
+                                    <div id="recommended-item-carousel" className="carousel slide" data-ride="carousel">
+                                        <div className="carousel-inner">
+                                            <div className="item active">
+                                                <Recommended data={product_top !== null ? product_top.slice(0, 3) : null} ></Recommended>
+                                            </div>
+                                            <div className="item">
+                                                <Recommended data={product_top !== null ? product_top.slice(3, 5) : null} ></Recommended>
+                                            </div>
+                                        </div>
+                                        <a className="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                                            <i className="fa fa-angle-left" />
+                                        </a>
+                                        <a className="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                                            <i className="fa fa-angle-right" />
+                                        </a>
+                                    </div>
+                                </div>{/*/recommended_items*/}
                                 <div className="rating-area">
                                     <ul className="ratings">
                                         <li className="rate-this">Rate this item:</li>
@@ -105,71 +191,18 @@ class BlogSingle extends Component {
                                 <div className="socials-share">
                                     <a href><img src="images/blog/socials.png" alt /></a>
                                 </div>{/*/socials-share*/}
-                                <div className="media commnets">
-                                    <a className="pull-left" href="#">
-                                        <img className="media-object" src="images/blog/man-one.jpg" alt />
-                                    </a>
-                                    <div className="media-body">
-                                        <h4 className="media-heading">Annie Davis</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        <div className="blog-socials">
-                                            <ul>
-                                                <li><a href><i className="fa fa-facebook" /></a></li>
-                                                <li><a href><i className="fa fa-twitter" /></a></li>
-                                                <li><a href><i className="fa fa-dribbble" /></a></li>
-                                                <li><a href><i className="fa fa-google-plus" /></a></li>
-                                            </ul>
-                                            <a className="btn btn-primary" href>Other Posts</a>
-                                        </div>
+
+                                {list_comment}
+                                <div className="col-sm-12 text-center m-b-25">
+                                    <div>
+                                        <a onClick={this.handler_prev} className="left recommended-item-control my--recommended-item-control-left" href="#recommended-item-carousel" data-slide="prev">
+                                            <i className="fa fa-angle-left" />
+                                        </a>
+                                        <a className="cart_quantity_up">{this.state.page}</a>
+                                        <a onClick={this.handler_next} className="left recommended-item-control my--recommended-item-control-right" href> <i className="fa fa-angle-right"></i> </a>
                                     </div>
-                                </div>{/*Comments*/}
-                                <div className="response-area">
-                                    <h2>3 RESPONSES</h2>
-                                    <ul className="media-list">
-                                        <li className="media">
-                                            <a className="pull-left" href="#">
-                                                <img className="media-object" src="images/blog/man-two.jpg" alt />
-                                            </a>
-                                            <div className="media-body">
-                                                <ul className="sinlge-post-meta">
-                                                    <li><i className="fa fa-user" />Janis Gallagher</li>
-                                                    <li><i className="fa fa-clock-o" /> 1:33 pm</li>
-                                                    <li><i className="fa fa-calendar" /> DEC 5, 2013</li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <a className="btn btn-primary" href><i className="fa fa-reply" />Replay</a>
-                                            </div>
-                                        </li>
-                                        <li className="media second-media">
-                                            <a className="pull-left" href="#">
-                                                <img className="media-object" src="images/blog/man-three.jpg" alt />
-                                            </a>
-                                            <div className="media-body">
-                                                <ul className="sinlge-post-meta">
-                                                    <li><i className="fa fa-user" />Janis Gallagher</li>
-                                                    <li><i className="fa fa-clock-o" /> 1:33 pm</li>
-                                                    <li><i className="fa fa-calendar" /> DEC 5, 2013</li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <a className="btn btn-primary" href><i className="fa fa-reply" />Replay</a>
-                                            </div>
-                                        </li>
-                                        <li className="media">
-                                            <a className="pull-left" href="#">
-                                                <img className="media-object" src="images/blog/man-four.jpg" alt />
-                                            </a>
-                                            <div className="media-body">
-                                                <ul className="sinlge-post-meta">
-                                                    <li><i className="fa fa-user" />Janis Gallagher</li>
-                                                    <li><i className="fa fa-clock-o" /> 1:33 pm</li>
-                                                    <li><i className="fa fa-calendar" /> DEC 5, 2013</li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <a className="btn btn-primary" href><i className="fa fa-reply" />Replay</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>{/*/Response-area*/}
+                                </div>
+                                
                                 <div className="replay-box">
                                     <div className="row">
                                         <div className="col-sm-4">
@@ -178,31 +211,24 @@ class BlogSingle extends Component {
                                                 <div className="blank-arrow">
                                                     <label>Your Name</label>
                                                 </div>
-                                                <span>*</span>
                                                 <input type="text" placeholder="write your name..." />
                                                 <div className="blank-arrow">
                                                     <label>Email Address</label>
                                                 </div>
-                                                <span>*</span>
-                                                <input type="email" placeholder="your email address..." />
-                                                <div className="blank-arrow">
-                                                    <label>Web Site</label>
-                                                </div>
-                                                <input type="email" placeholder="current city..." />
+                                                <input type="text" placeholder="write emai..." />
                                             </form>
                                         </div>
                                         <div className="col-sm-8">
                                             <div className="text-area">
                                                 <div className="blank-arrow">
-                                                    <label>Your Name</label>
+                                                    <label>Bình luận </label>
                                                 </div>
-                                                <span>*</span>
-                                                <textarea name="message" rows={11} defaultValue={""} />
+                                                <textarea style={{backgroundColor: "#ffffff"}} name="message" rows={11} defaultValue={""} />
                                                 <a className="btn btn-primary" href>post comment</a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>{/*/Repaly Box*/}
+                                </div>
                             </div>
                         </div>
                     </div>

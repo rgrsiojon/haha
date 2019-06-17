@@ -55,6 +55,9 @@ class Home extends Component {
             is_disk_512: false,
             is_disk_1024: false,
             is_disk_4098: false,
+            is_15_inch: false,
+            is_13_inch: false,
+            is_search: true
         }
 
         this.handler_ram_choose_ram_8 = this.handler_ram_choose_ram_8.bind(this)
@@ -78,6 +81,8 @@ class Home extends Component {
         this.handler_disk_512 = this.handler_disk_512.bind(this)
         this.handler_disk_1024 = this.handler_disk_1024.bind(this)
         this.handler_disk_4098 = this.handler_disk_4098.bind(this)
+        this.handler_inch_13 = this.handler_inch_13.bind(this)
+        this.handler_inch_15 = this.handler_inch_15.bind(this)
     }
 
     componentDidMount() {
@@ -254,8 +259,24 @@ class Home extends Component {
         })
     }
 
+    handler_inch_13() {
+        this.setState(state => {
+            return {
+                is_13_inch: !state.is_13_inch
+            }
+        })
+    }
+
+    handler_inch_15() {
+        this.setState(state => {
+            return {
+                is_15_inch: !state.is_15_inch
+            }
+        })
+    }
 
     render() {
+        console.log(this.props.search.content)
         let { is_loading, data, product_top, is_created } = this.props.product
         let { _create_cart_end } = this.props
         let cart = this.props.carts
@@ -302,6 +323,9 @@ class Home extends Component {
             this.state.is_disk_512 ||
             this.state.is_disk_1024 ||
             this.state.is_disk_4098 ||
+            this.state.is_13_inch ||
+            this.state.is_15_inch ||
+            this.state.is_search ||
             this.state.is_i7
         ) ? data.filter(item => (
             item.ram === 16 && this.state.is_ram_16) || 
@@ -324,6 +348,9 @@ class Home extends Component {
             (item.disk === 512 && this.state.is_disk_512) ||
             (item.disk === 1024 && this.state.is_disk_1024) ||
             (item.disk === 4098 && this.state.is_disk_4098) ||
+            (item.display.indexOf(`15.4″`) !== -1 && this.state.is_15_inch) ||
+            (item.display.indexOf(`13.3″`) !== -1 && this.state.is_13_inch) ||
+            (item.title.toLowerCase().indexOf(this.props.search.content.toLowerCase()) !== -1 ) && this.state.is_search ||
             (item.status === "Used, máy đẹp likenew fullbox" && this.state.is_status_full_box)
         ) : data
 
@@ -414,6 +441,18 @@ class Home extends Component {
                             </li>
                         </ul>
                     </div>
+        const inch = <div className="col-md-12 m-t-25">
+                        <h2 class="title text-center">Kích thước</h2>
+                        <div className="line-seprate welcome2"></div>
+                        <ul className="list-unstyled navbar__list">
+                            <li className="active has-sub m-t-14">
+                                <input onClick={this.handler_inch_13} className="m-r-10" type="checkbox" /> 13.3 inch
+                            </li>
+                            <li className="active has-sub m-t-14">
+                                <input onClick={this.handler_inch_15} className="m-r-10" type="checkbox" /> 15.6 inch
+                            </li>
+                        </ul>
+                    </div>
         return (
             <>
                 {alert}
@@ -435,37 +474,10 @@ class Home extends Component {
                                    {producer}
                                     {status}
                                     {type}
-
-                                    <div className="col-md-12 m-t-25">
-                                        <h2 class="title text-center">Kích thước</h2>
-                                        <div className="line-seprate welcome2"></div>
-                                        <ul className="list-unstyled navbar__list">
-                                            <li className="active has-sub m-t-14">
-                                                <input className="m-r-10" type="checkbox" /> 13.3 inch
-                                            </li>
-                                            <li className="active has-sub m-t-14">
-                                                <input className="m-r-10" type="checkbox" /> 15.6 inch
-                                            </li>
-                                        </ul>
-                                    </div>
-
+                                    {inch}
                                     {cpu}
                                     {disk}
                                     {filter_ram}
-                                    
-                                    <div className="col-md-12 m-t-25">
-                                        <h2 class="title text-center">Touch bar</h2>
-                                        <div className="line-seprate welcome2"></div>
-                                        <ul className="list-unstyled navbar__list">
-                                            <li className="active has-sub m-t-14">
-                                                <input className="m-r-10" type="checkbox" /> Non-touchbar
-                                            </li>
-                                            <li className="active has-sub m-t-14">
-                                                <input className="m-r-10" type="checkbox" /> Touchbar
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    
                                 </div>
                             </div>
 
@@ -499,165 +511,11 @@ class Home extends Component {
                                             <i className="fa fa-angle-right" />
                                         </a>
                                     </div>
-                                </div>{/*/recommended_items*/}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-
-
-                <footer id="footer">{/*Footer*/}
-                    <div className="footer-top">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm-2">
-                                    <div className="companyinfo">
-                                        <h2><span>e</span>-shopper</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
-                                    </div>
-                                </div>
-                                <div className="col-sm-7">
-                                    <div className="col-sm-3">
-                                        <div className="video-gallery text-center">
-                                            <a href="#">
-                                                <div className="iframe-img">
-                                                    <img src="images/home/iframe1.png" alt />
-                                                </div>
-                                                <div className="overlay-icon">
-                                                    <i className="fa fa-play-circle-o" />
-                                                </div>
-                                            </a>
-                                            <p>Circle of Hands</p>
-                                            <h2>24 DEC 2014</h2>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3">
-                                        <div className="video-gallery text-center">
-                                            <a href="#">
-                                                <div className="iframe-img">
-                                                    <img src="images/home/iframe2.png" alt />
-                                                </div>
-                                                <div className="overlay-icon">
-                                                    <i className="fa fa-play-circle-o" />
-                                                </div>
-                                            </a>
-                                            <p>Circle of Hands</p>
-                                            <h2>24 DEC 2014</h2>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3">
-                                        <div className="video-gallery text-center">
-                                            <a href="#">
-                                                <div className="iframe-img">
-                                                    <img src="images/home/iframe3.png" alt />
-                                                </div>
-                                                <div className="overlay-icon">
-                                                    <i className="fa fa-play-circle-o" />
-                                                </div>
-                                            </a>
-                                            <p>Circle of Hands</p>
-                                            <h2>24 DEC 2014</h2>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3">
-                                        <div className="video-gallery text-center">
-                                            <a href="#">
-                                                <div className="iframe-img">
-                                                    <img src="images/home/iframe4.png" alt />
-                                                </div>
-                                                <div className="overlay-icon">
-                                                    <i className="fa fa-play-circle-o" />
-                                                </div>
-                                            </a>
-                                            <p>Circle of Hands</p>
-                                            <h2>24 DEC 2014</h2>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3">
-                                    <div className="address">
-                                        <img src="images/home/map.png" alt />
-                                        <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="footer-widget">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm-2">
-                                    <div className="single-widget">
-                                        <h2>Service</h2>
-                                        <ul className="nav nav-pills nav-stacked">
-                                            <li><a href="#">Online Help</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                            <li><a href="#">Order Status</a></li>
-                                            <li><a href="#">Change Location</a></li>
-                                            <li><a href="#">FAQ’s</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-sm-2">
-                                    <div className="single-widget">
-                                        <h2>Quock Shop</h2>
-                                        <ul className="nav nav-pills nav-stacked">
-                                            <li><a href="#">T-Shirt</a></li>
-                                            <li><a href="#">Mens</a></li>
-                                            <li><a href="#">Womens</a></li>
-                                            <li><a href="#">Gift Cards</a></li>
-                                            <li><a href="#">Shoes</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-sm-2">
-                                    <div className="single-widget">
-                                        <h2>Policies</h2>
-                                        <ul className="nav nav-pills nav-stacked">
-                                            <li><a href="#">Terms of Use</a></li>
-                                            <li><a href="#">Privecy Policy</a></li>
-                                            <li><a href="#">Refund Policy</a></li>
-                                            <li><a href="#">Billing System</a></li>
-                                            <li><a href="#">Ticket System</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-sm-2">
-                                    <div className="single-widget">
-                                        <h2>About Shopper</h2>
-                                        <ul className="nav nav-pills nav-stacked">
-                                            <li><a href="#">Company Information</a></li>
-                                            <li><a href="#">Careers</a></li>
-                                            <li><a href="#">Store Location</a></li>
-                                            <li><a href="#">Affillate Program</a></li>
-                                            <li><a href="#">Copyright</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3 col-sm-offset-1">
-                                    <div className="single-widget">
-                                        <h2>About Shopper</h2>
-                                        <form action="#" className="searchform">
-                                            <input type="text" placeholder="Your email address" />
-                                            <button type="submit" className="btn btn-default"><i className="fa fa-arrow-circle-o-right" /></button>
-                                            <p>Get the most recent updates from <br />our site and be updated your self...</p>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="footer-bottom">
-                        <div className="container">
-                            <div className="row">
-                                <p className="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                                <p className="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
-                            </div>
-                        </div>
-                    </div>
-                </footer>{/*/Footer*/}
-
-
             </>
         );
     }

@@ -149,3 +149,24 @@ export const get_top_product_fail = (error) => {
         error: error
     }
 }
+
+export const get_comment_of_product = (id) => {
+    return {
+        type: PRODUCT.GET_COMMENT_BY_ID,
+        id: id
+    }
+}
+
+export const get_comment_of_product_success = (data) => {
+    return {
+        type: PRODUCT.GET_COMMENT_BY_ID_SUCCESS,
+        data: data
+    }
+}
+
+export const get_comment_of_product_fail = (error) => {
+    return {
+        type: PRODUCT.GET_COMMENT_BY_ID_FAIL,
+        error: error
+    }
+}

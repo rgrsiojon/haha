@@ -9,69 +9,12 @@ class Footer extends Component {
                         <div className="row">
                             <div className="col-sm-2">
                                 <div className="companyinfo">
-                                    <h2><span>e</span>-shopper</h2>
+                                    <h2><span>E</span>-Mac</h2>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
                                 </div>
                             </div>
-                            <div className="col-sm-7">
-                                <div className="col-sm-3">
-                                    <div className="video-gallery text-center">
-                                        <a href="#">
-                                            <div className="iframe-img">
-                                                <img src="images/home/iframe1.png" alt />
-                                            </div>
-                                            <div className="overlay-icon">
-                                                <i className="fa fa-play-circle-o" />
-                                            </div>
-                                        </a>
-                                        <p>Circle of Hands</p>
-                                        <h2>24 DEC 2014</h2>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3">
-                                    <div className="video-gallery text-center">
-                                        <a href="#">
-                                            <div className="iframe-img">
-                                                <img src="images/home/iframe2.png" alt />
-                                            </div>
-                                            <div className="overlay-icon">
-                                                <i className="fa fa-play-circle-o" />
-                                            </div>
-                                        </a>
-                                        <p>Circle of Hands</p>
-                                        <h2>24 DEC 2014</h2>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3">
-                                    <div className="video-gallery text-center">
-                                        <a href="#">
-                                            <div className="iframe-img">
-                                                <img src="images/home/iframe3.png" alt />
-                                            </div>
-                                            <div className="overlay-icon">
-                                                <i className="fa fa-play-circle-o" />
-                                            </div>
-                                        </a>
-                                        <p>Circle of Hands</p>
-                                        <h2>24 DEC 2014</h2>
-                                    </div>
-                                </div>
-                                <div className="col-sm-3">
-                                    <div className="video-gallery text-center">
-                                        <a href="#">
-                                            <div className="iframe-img">
-                                                <img src="images/home/iframe4.png" alt />
-                                            </div>
-                                            <div className="overlay-icon">
-                                                <i className="fa fa-play-circle-o" />
-                                            </div>
-                                        </a>
-                                        <p>Circle of Hands</p>
-                                        <h2>24 DEC 2014</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-3">
+                            
+                            <div className="col-sm-3 float-right" style={{float: "right"}}>
                                 <div className="address">
                                     <img src="images/home/map.png" alt />
                                     <p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
@@ -99,11 +42,8 @@ class Footer extends Component {
                                 <div className="single-widget">
                                     <h2>Quock Shop</h2>
                                     <ul className="nav nav-pills nav-stacked">
-                                        <li><a href>T-Shirt</a></li>
-                                        <li><a href>Mens</a></li>
-                                        <li><a href>Womens</a></li>
-                                        <li><a href>Gift Cards</a></li>
-                                        <li><a href>Shoes</a></li>
+                                        <li><a href>Macbook </a></li>
+                                        <li><a href>Mac mini</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -121,7 +61,7 @@ class Footer extends Component {
                             </div>
                             <div className="col-sm-2">
                                 <div className="single-widget">
-                                    <h2>About Shopper</h2>
+                                    <h2>About Mac</h2>
                                     <ul className="nav nav-pills nav-stacked">
                                         <li><a href>Company Information</a></li>
                                         <li><a href>Careers</a></li>
@@ -146,9 +86,8 @@ class Footer extends Component {
                 </div>
                 <div className="footer-bottom">
                     <div className="container">
-                        <div className="row">
-                            <p className="pull-left">Copyright © 2013 E-Shopper. All rights reserved.</p>
-                            <p className="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                        <div className="row text-center">
+                            <p className="pull-center">Copyright © 2019 E-Mac. All rights reserved.</p>
                         </div>
                     </div>
                 </div>
