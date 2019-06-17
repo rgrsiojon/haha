@@ -325,7 +325,7 @@ class Home extends Component {
             this.state.is_disk_4098 ||
             this.state.is_13_inch ||
             this.state.is_15_inch ||
-            this.state.is_search ||
+            // this.state.is_search ||
             this.state.is_i7
         ) ? data.filter(item => (
             item.ram === 16 && this.state.is_ram_16) || 
@@ -350,7 +350,7 @@ class Home extends Component {
             (item.disk === 4098 && this.state.is_disk_4098) ||
             (item.display.indexOf(`15.4″`) !== -1 && this.state.is_15_inch) ||
             (item.display.indexOf(`13.3″`) !== -1 && this.state.is_13_inch) ||
-            (item.title.toLowerCase().indexOf(this.props.search.content.toLowerCase()) !== -1 ) && this.state.is_search ||
+            // (item.title.toLowerCase().indexOf(this.props.search.content.toLowerCase()) !== -1 ) && this.state.is_search ||
             (item.status === "Used, máy đẹp likenew fullbox" && this.state.is_status_full_box)
         ) : data
 
