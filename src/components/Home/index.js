@@ -360,7 +360,7 @@ class Home extends Component {
             
             (item.status === "Used, máy đẹp likenew fullbox" && this.state.is_status_full_box)
         ) : data
-        
+
         data = data !== null && (this.state.is_search) 
         ? data.filter(item => (
             (item.title.toLowerCase().indexOf(this.props.search.content.toLowerCase()) !== -1 ) && this.state.is_search
@@ -430,9 +430,6 @@ class Home extends Component {
                             </li>
                             <li className="active has-sub m-t-14">
                                 <input onClick={this.handler_status_i9} className="m-r-10" type="checkbox" /> Core i9
-                            </li>
-                            <li className="active has-sub m-t-14">
-                                <input onClick={this.handler_status_im} className="m-r-10" type="checkbox" /> Core M
                             </li>
                         </ul>
                     </div>
