@@ -23,8 +23,6 @@ import Admin from './containers/Admin'
 import Users from './containers/Admin/Users'
 import Home from './containers/Home'
 import TabbarAdmin from './hoc/layout/TabbarAdmin'
-import Tabbar from './containers/Tabbar'
-import Order from './containers/Order'
 import { PAGE } from './Common'
 import Loading from './components/Loading'
 
@@ -69,8 +67,6 @@ class App extends Component {
         let contact_us = () => <Header><Contact/></Header>
         let login = () => <Header><Login/></Header>
         let blog_single = ({ match }) => <Header><BlogSingle id={match.params.id}/></Header>
-
-        let order = () => <Tabbar page = {PAGE.ORDER}><Order/></Tabbar>
         let routes = auth !== undefined
         ?
             <Switch>

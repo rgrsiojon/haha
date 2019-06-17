@@ -31,7 +31,7 @@ class Products extends Component {
     }
 
     handler_next() {
-        if(this.state.page === this.state.total_page) {
+        if(this.state.page > this.state.total_page) {
             return false
         } else {
             this.setState(state => {
