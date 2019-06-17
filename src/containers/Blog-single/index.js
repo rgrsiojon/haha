@@ -5,7 +5,8 @@ import { get_top_product, get_product_by_id, get_comment_of_product } from './..
 
 const map_state_to_props = state => ({
     auth: state.auth,
-    product: state.product
+    product: state.product,
+    carts: state.carts,
 })
 
 const map_dispatch_to_props = dispatch => ({
@@ -17,6 +18,12 @@ const map_dispatch_to_props = dispatch => ({
     },
     _get_comment_of_product: function(id) {
         dispatch(get_comment_of_product(id))
+    },
+    _create_carts: function(data) {
+        dispatch(create_cart(data))
+    },
+    _create_cart_end: function() {
+        dispatch(create_cart_end())
     }
 })
 

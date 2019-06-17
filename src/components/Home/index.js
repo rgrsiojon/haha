@@ -83,6 +83,8 @@ class Home extends Component {
         this.handler_disk_4098 = this.handler_disk_4098.bind(this)
         this.handler_inch_13 = this.handler_inch_13.bind(this)
         this.handler_inch_15 = this.handler_inch_15.bind(this)
+        this.hanler_product = this.hanler_product.bind(this)
+
     }
 
     componentDidMount() {
@@ -273,6 +275,11 @@ class Home extends Component {
                 is_15_inch: !state.is_15_inch
             }
         })
+    }
+
+    hanler_product(data) {
+        let { _create_carts } = this.props
+        _create_carts(data)
     }
 
     render() {

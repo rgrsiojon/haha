@@ -35,7 +35,7 @@ class Cart extends Component {
         : null
 
         let list_cart = data_result !== null 
-        ? data_result.map(item => {
+        ? data_result.map((item, index) => {
             return <tr>
                 <td style={{ width: 300}}>
                     <a>
@@ -52,12 +52,12 @@ class Cart extends Component {
                 <td className="cart_quantity">
                     <div className="cart_quantity_button">
                         <a className="cart_quantity_up" href> + </a>
-                        <input className="cart_quantity_input" style={{ width: 53 }} type="text" name="quantity" defaultValue={item[0].amount} />
+                        <input className="cart_quantity_input" style={{ width: 53 }} type="text" name="quantity" defaultValue={carts.data[index].amount} />
                         <a className="cart_quantity_down" href> - </a>
                     </div>
                 </td>
                 <td className="cart_total">
-                    <p className="cart_total_price">{item[0].price * item[0].amount} VND</p>
+                    <p className="cart_total_price"> {item[0].price * carts.data[index].amount} VND</p>
                 </td>
                 <td className="cart_delete">
                     <a className="cart_quantity_delete" href><i className="fa fa-times" /></a>
@@ -67,8 +67,7 @@ class Cart extends Component {
 
         let total = data_result !== null 
         ? data_result.reduce(function(total, currentValue, currentIndex, arr) {
-            console.log(currentValue)
-            return currentValue[0].price * currentValue[0].amount + total
+            return currentValue[0].price * carts.data[currentIndex].amount + total
         }, 0)
         : 0
 
