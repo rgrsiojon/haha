@@ -11,12 +11,14 @@ class Profile extends Component {
             phone: null,
             file: ""
         }
-
+        this.file = React.createRef();
+        this.preview_file = React.createRef();
         this.handel_change_address = this.handel_change_address.bind(this)
         this.handel_change_email = this.handel_change_email.bind(this)
         this.handel_change_phone = this.handel_change_phone.bind(this)
         this.handler_click_update = this.handler_click_update.bind(this)
         this.handeler_file_avatar= this.handeler_file_avatar.bind(this)
+        this.handler_choose_file = this.handler_choose_file.bind(this)
     }
 
     componentDidMount() {
@@ -43,7 +45,18 @@ class Profile extends Component {
     }
 
     handeler_file_avatar() {
+        this.setState ({
+            file: this.file.current.files[0]
+        })
 
+        var reader  = new FileReader();
+        reader.addEventListener("load", () => {
+            this.preview_file.current.src = reader.result; 
+        }, false);
+    
+        if (this.file.current.files[0]) {
+            reader.readAsDataURL(this.file.current.files[0])
+        }
     }
 
     handler_click_update() {
@@ -52,6 +65,10 @@ class Profile extends Component {
             id: this.props.auth.data.id,
             ...this.state
         })
+    }
+
+    handler_choose_file() {
+        this.file.current.click()
     }
 
     render() {
@@ -95,8 +112,17 @@ class Profile extends Component {
                         <div className="row">
                             <div className="col-sm-5">
                                 <div className="view-product">
-                                    <img src={user_info !== null ? user_info.avatar : ""} alt />
+                                    <img ref={this.preview_file} src={user_info !== null ? user_info.avatar : ""} alt />
                                 </div>
+
+                                <div className="product-information text-center ">
+                                    <button onClick={this.handler_choose_file} style={{margin: 0}} type="button" className="btn btn-fefault cart">
+                                        Thay đổi ảnh
+                                    </button>
+
+                                    <input onChange={this.handeler_file_avatar} ref={this.file} style={{display: "none"}} multiple type='file'></input>
+                                </div>
+                                
                             </div>
                             <div className="col-sm-5 pull-right">
                                 {email}

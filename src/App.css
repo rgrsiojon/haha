@@ -69,3 +69,7 @@
     margin-right: 15px;
     max-width: 80px;
 }
+
+.view-product img {
+    height: auto;
+}

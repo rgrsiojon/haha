@@ -26,17 +26,28 @@ function* handler_get_user_info(action) {
 }
 
 function* handler_update_user_info(action) {
+    console.log(action.data.file)
     const datareq = {
         "email": action.data.email,
         "address": action.data.address,
         "phone": action.data.phone
     }
+
+    var bodyFormData = new FormData();
+    bodyFormData.append('file', action.data.file); 
     try {
-        const data = yield axios.put(`/api/auth/info/${action.data.id}`, datareq)
+        const data_user_update = yield axios.put(`/api/auth/info/${action.data.id}`, datareq)
         .then(response => {
             return response.data
         }).catch(error => {
             return error
+        })
+        yield put(update_user_info_success(data_user_update))
+        const data = yield axios.put(`/api/auth/info/${action.data.id}/avatar`, bodyFormData)
+        .then(response => {
+            return response.data
+        }).catch(err => {
+            return err
         })
         yield put(update_user_info_success(data))
     } catch {
