@@ -14,8 +14,7 @@ class SingIn extends Component {
     }
     handel_click_button_login() {
         let { login } = this.props
-        // login(this.state.email, this.state.password)
-        login("hacnguyen1412@gmail.com", "1234567")
+        login(this.state.email, this.state.password)
     }
 
     handel_change_input_email(event) {

@@ -96,7 +96,6 @@ class App extends Component {
             <Route path="/contact-us" exact component={Contact} />
             <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 
-            <Route path="/order" exact component={order} />
             <Route path="/signin" exact component={SingIn} />
             <Route path="/signup" exact component={SingUp}/>
             <Route path="/admin" exact component={SingIn}/>
