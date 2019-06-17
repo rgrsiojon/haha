@@ -10,7 +10,8 @@ import {
     auth_login_success, 
     auth_login_fail,
     register_success,
-    register_fail
+    register_fail,
+    logout_success
 } from '../store/actions/auth';
 
 function* handler_login_with_email(actions) {
@@ -49,7 +50,13 @@ function* handler_register_with_email(action) {
     }
 }
 
+function* handler_logout() {
+    cookies.remove('auth')
+    yield put(logout_success())
+}
+
 export function* authentication() {
     yield takeEvery(AUTH.LOGIN, handler_login_with_email)
     yield takeEvery(AUTH.REGISTER, handler_register_with_email)
+    yield takeEvery(AUTH.LOGOUT, handler_logout)
 }

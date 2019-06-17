@@ -3,12 +3,16 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Footer from './../Footer'
 import { connect } from "react-redux";
 import { handler_search } from './../../../store/actions/search'
+import { logout } from './../../../store/actions/auth'
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
 
 class Header extends Component {
     constructor(props) {
         super(props)
         this.handler_change_input_search = this.handler_change_input_search.bind(this)
+        this.handler_logout = this.handler_logout.bind(this)
     }
 
     handler_change_input_search(e) {
@@ -16,7 +20,13 @@ class Header extends Component {
         _handler_search(e.target.value)
     }
 
+    handler_logout() {
+        let { logout } = this.props
+        logout()
+    }
+
     render() {
+        var auth = cookies.get('auth')
         return (
             <div>
                 <header id="header">{/*header*/}
@@ -66,7 +76,12 @@ class Header extends Component {
                                                 <Link to="/cart"><i className="fa fa-shopping-cart" /> Cart</Link>
                                             </li>
                                             <li>
-                                                <Link to="/login"><i className="fa fa-lock" /> Login</Link>
+                                                {
+                                                    auth !== undefined 
+                                                    ? <a onClick={this.handler_logout} href><i className="fa fa-lock" /> Logout</a>
+                                                    : <Link to="/login"><i className="fa fa-lock" /> Login</Link>
+                                                }
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -128,12 +143,16 @@ class Header extends Component {
 const map_state_to_props = state => ({
     product: state.product,
     carts: state.carts,
-    search: state.search
+    search: state.search,
+    user: state.user
 })
 
 const map_dispatch_to_props = dispatch => ({
     _handler_search: function(content) {
         dispatch(handler_search(content))
+    },
+    logout: function() {
+        dispatch(logout())
     }
 })
 

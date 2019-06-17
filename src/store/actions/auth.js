@@ -40,3 +40,23 @@ export const register_fail = (error) => {
         error: error
     }
 };
+
+
+export const logout = (data) => {
+    return{
+        type: AUTH.LOGOUT
+    }
+};
+
+export const logout_success = (data) => {
+    return{
+        type: AUTH.LOGOUT_SUCCESS
+    }
+};
+
+export const logout_fail = (error) => {
+    return {
+        type: AUTH.LOGOUT_FAIL,
+        error: error
+    }
+};

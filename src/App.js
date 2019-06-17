@@ -78,7 +78,7 @@ class App extends Component {
                 <Route path="/profile" exact component={profile} />
                 <Route path="/shop" exact component={shop} />
                 <Route path="/product-details" exact component={product_details} />
-                <Route path="/login" exact component={login} />
+                <Route path="/login" exact component={profile} />
                 <Route path="/contact-us" exact component={contact_us} />
                 <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 
@@ -92,12 +92,12 @@ class App extends Component {
         : <Switch>
             <Route path="/" exact component={home} />
             <Route path="/checkout" exact component={Checkout} />
-            <Route path="/cart" exact component={Login} />
+            <Route path="/cart" exact component={login} />
 
-            <Route path="/profile" exact component={Login} />
+            <Route path="/profile" exact component={login} />
 
             <Route path="/product-details" exact component={ProductDetails} />
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" exact component={login} />
             <Route path="/contact-us" exact component={Contact} />
             <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 

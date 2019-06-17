@@ -71,6 +71,7 @@ class Header extends Component {
                                                         <i className="zmdi zmdi-money-box" />Billing</a>
                                                 </div>
                                             </div>
+                                            
                                             <div className="account-dropdown__footer">
                                                 <a href="#">
                                                     <i className="zmdi zmdi-power" />Logout</a>

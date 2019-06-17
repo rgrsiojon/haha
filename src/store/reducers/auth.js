@@ -57,6 +57,27 @@ const register_fail = (state, action) => {
         error: action.error
     }
 }
+
+const logout = (state, action) => {
+    return {
+        ...state,
+        loading: true,
+    }
+}
+
+const logout_success = (state, action) => {
+    return {
+        ...state,
+        loading: false
+    }
+}
+
+const logout_fail = (state, action) => {
+    return {
+        ...state,
+        loading: false
+    }
+}
 //@compare to return
 export default (state = initial_state, action) => {
     switch (action.type) {
@@ -66,12 +87,20 @@ export default (state = initial_state, action) => {
             return user_login_success(state, action)
         case AUTH.LOGIN_FAIL:
             return user_login_fail(state, action)
+
         case AUTH.REGISTER:
             return register(state, action)
         case AUTH.REGISTER_SUCCESS:
             return register_success(state, action)
         case AUTH.REGISTER_FAIL:
             return register_fail(state, action)
+
+        case AUTH.LOGOUT:
+            return logout(state, action)
+        case AUTH.LOGOUT_SUCCESS:
+            return logout_success(state, action)
+        case AUTH.LOGOUT_FAIL:
+            return logout_fail(state, action)
         default:
             return state
     }
