@@ -161,7 +161,7 @@ function* handler_get_to_product() {
 
 function* handler_get_comment_of_product(action) {
     try {
-        const data = yield axios.get(`/api/auth//comment/${action.id}`)
+        const data = yield axios.get(`/api/auth/comment/${action.id}`)
         .then(response => {
             return response.data
         }).catch(error => {
@@ -176,12 +176,12 @@ function* handler_get_comment_of_product(action) {
 function* handler_create_comment_for_product(action) {
     const datareq = {
         "email": action.data.email,
-        "user_name": action.data.user_name,
+        "user_name": action.data.name,
         "content": action.data.content
     }
 
     try {
-        const data = yield axios.post(`/api/auth/comment/${action.data.id}`, datareq)
+        const data = yield axios.post(`/api/auth/comment/31`, datareq)
         .then(response => {
             return response.data
         }).catch(error => {

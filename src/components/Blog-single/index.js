@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Loading from './../Loading'
 import Recommended from './../Recommended'
+import Alert from './../Alert'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Blog extends Component {
@@ -95,6 +96,7 @@ class BlogSingle extends Component {
         this.handler_change_email = this.handler_change_email.bind(this)
         this.handler_change_content = this.handler_change_content.bind(this)
         this.reload = this.reload.bind(this)
+        this.handler_comment = this.handler_comment.bind(this)
 
     }
 
@@ -135,13 +137,13 @@ class BlogSingle extends Component {
         })
     }
 
-    handler_change_email() {
+    handler_change_email(e) {
         this.setState({
             email: e.target.value
         })
     }
 
-    handler_change_content() {
+    handler_change_content(e) {
         this.setState({
             content: e.target.value
         })
@@ -156,11 +158,19 @@ class BlogSingle extends Component {
     reload(id) {
         let { _get_product_by_id, _get_comment_of_product } = this.props
         _get_product_by_id(id)
+        this.props.id = id
         _get_comment_of_product(id)
     }
 
+    handler_comment() {
+        let { _create_comment_for_product, _get_comment_of_product } = this.props
+        _create_comment_for_product(this.state)
+        _get_comment_of_product(this.props.id)
+    }
+
     render() {
-        let { is_loading, product, data, product_top, comment } = this.props.product
+        let { is_loading, product, data, product_top, comment, created_comment, data_comment } = this.props.product
+        let { _create_comment_end } = this.props
         let pagesComment = comment !== null ? parseInt(parseInt(comment.length) / 3) : 0
         if (this.state.total_page !== pagesComment) {
             this.handler_total(pagesComment)
@@ -186,8 +196,16 @@ class BlogSingle extends Component {
 
             </div>
         }) : <div></div>
+        let alert = data_comment !== null
+            ? <Alert className="my--alert--secon">Add product to cart is success</Alert>
+            : <div></div>
+        if (created_comment === true) {
+            _create_comment_end()
+        }
+
         return (
             <div>
+                {alert}
                 <section>
                     <div className="container">
                         <div className="row">
@@ -216,25 +234,7 @@ class BlogSingle extends Component {
                                         : <Loading></Loading>
                                 }
 
-                                <div className="recommended_items">{/*recommended_items*/}
-                                    <h2 className="title text-center">Sản phẩm liên quan</h2>
-                                    <div id="recommended-item-carousel" className="carousel slide" data-ride="carousel">
-                                        <div className="carousel-inner">
-                                            <div className="item active">
-                                                <Recommended data={product_top !== null ? product_top.slice(0, 3) : null} ></Recommended>
-                                            </div>
-                                            <div className="item">
-                                                <Recommended data={product_top !== null ? product_top.slice(3, 5) : null} ></Recommended>
-                                            </div>
-                                        </div>
-                                        <a className="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                                            <i className="fa fa-angle-left" />
-                                        </a>
-                                        <a className="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                                            <i className="fa fa-angle-right" />
-                                        </a>
-                                    </div>
-                                </div>{/*/recommended_items*/}
+                                
                                 <div className="rating-area">
                                     <ul className="ratings">
                                         <li className="rate-this">Rate this item:</li>
@@ -289,7 +289,7 @@ class BlogSingle extends Component {
                                                     <label>Bình luận </label>
                                                 </div>
                                                 <textarea onChange={this.handler_change_content} style={{ backgroundColor: "#ffffff" }} name="message" rows={11} defaultValue={""} />
-                                                <button className="btn btn-primary" href> Bình luận</button>
+                                                <button onClick={this.handler_comment} className="btn btn-primary" href> Bình luận</button>
                                             </div>
                                         </div>
                                     </div>

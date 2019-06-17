@@ -9,6 +9,7 @@ const intialization_state = {
     comment: null,
     product: null,
     created_comment: null,
+    data_comment: null,
     data: null,
     error: null
 }
@@ -193,10 +194,13 @@ function create_comment_of_product(state, action) {
 }
 
 function create_comment_of_product_sucess(state, action) {
+    console.log("vaof ddabasdkf")
     return {
         ...state,
         is_loading: false,
-        created_comment: true
+        created_comment: true,
+        data_comment: action.data
+
     }
 }
 
@@ -205,6 +209,14 @@ function create_comment_of_product_fail(state, action) {
         ...state,
         is_loading: false,
         created_comment: false
+    }
+}
+
+function create_comment_of_product_end(state, action) {
+    return {
+        ...state,
+        is_loading: false,
+        created_comment: null
     }
 }
 
@@ -276,7 +288,10 @@ export default (state = intialization_state, action) => {
             return create_comment_of_product_sucess(state, action)
         case PRODUCT.CREATE_COMMENT_FOR_PRODUCT_FAIL:
             return create_comment_of_product_fail(state, action)
+        case PRODUCT.CREATE_COMMENT_FOR_PRODUCT_END:
+            return create_comment_of_product_end(state, action)
         default: 
             return state;
     }
 }
+

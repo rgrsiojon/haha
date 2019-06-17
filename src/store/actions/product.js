@@ -191,3 +191,10 @@ export const create_comment_of_product_fail = (error) => {
         error: error
     }
 }
+
+export const create_comment_of_product_end = (error) => {
+    return {
+        type: PRODUCT.CREATE_COMMENT_FOR_PRODUCT_END,
+        error: error
+    }
+}

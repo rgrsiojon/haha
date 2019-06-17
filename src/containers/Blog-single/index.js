@@ -1,6 +1,12 @@
 import { connect } from "react-redux";
 import BlogSingle from '../../components/Blog-single'
-import { get_top_product, get_product_by_id, get_comment_of_product, create_comment_of_product } from './../../store/actions/product'
+import { 
+    get_top_product, 
+    get_product_by_id, 
+    get_comment_of_product, 
+    create_comment_of_product,
+    create_comment_of_product_end
+} from './../../store/actions/product'
 
 const map_state_to_props = state => ({
     auth: state.auth,
@@ -26,6 +32,9 @@ const map_dispatch_to_props = dispatch => ({
     },
     _create_comment_for_product: function(data) {
         dispatch(create_comment_of_product(data))
+    },
+    _create_comment_end: function() {
+        dispatch(create_comment_of_product_end())
     }
 })
 
