@@ -4,6 +4,7 @@ import Products from './../Products'
 import Loading from './../Loading'
 import Alert from './../Alert'
 import _ from 'lodash'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Recommended extends Component {
     constructor(props) {
@@ -17,10 +18,11 @@ class Recommended extends Component {
                     <div className="product-image-wrapper">
                         <div className="single-products">
                             <div className="productinfo text-center">
-                                <img src={i.avatar} alt />
-                                <h2>{i.price}</h2>
-                                <p>{i.title}</p>
-                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
+                                <Link to={`/product/macbook/${i.id}`}>
+                                    <img src={i.avatar} alt />
+                                    <h2>{i.price}</h2>
+                                    <p>{i.title}</p>
+                                </Link>
                             </div>
                         </div>
                     </div>

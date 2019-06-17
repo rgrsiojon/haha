@@ -74,3 +74,11 @@ export const SEARCH = {
     UPDATE: "UPDATE",
 }
 
+export const USER = {
+    //@get all user
+    GET_ALL: "GET_ALL",
+    GET_ALL_SUCCESS: "GET_ALL_SUCCESS",
+    GET_ALL_FAIL: "GET_ALL_FAIL"
+
+}
+

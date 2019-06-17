@@ -181,7 +181,7 @@ function* handler_create_comment_for_product(action) {
     }
 
     try {
-        const data = yield axios.post(`/api/auth/comment/31`, datareq)
+        const data = yield axios.post(`/api/auth/comment/${action.data.id}`, datareq)
         .then(response => {
             return response.data
         }).catch(error => {

@@ -87,8 +87,10 @@ class BlogSingle extends Component {
             total_page: 0,
             name: "",
             email: "",
-            content: ""
+            content: "",
+            id: ""
         }
+
         this.handler_next = this.handler_next.bind(this)
         this.handler_prev = this.handler_prev.bind(this)
         this.handler_total = this.handler_total.bind(this)
@@ -158,14 +160,16 @@ class BlogSingle extends Component {
     reload(id) {
         let { _get_product_by_id, _get_comment_of_product } = this.props
         _get_product_by_id(id)
-        this.props.id = id
         _get_comment_of_product(id)
     }
 
     handler_comment() {
         let { _create_comment_for_product, _get_comment_of_product } = this.props
-        _create_comment_for_product(this.state)
-        _get_comment_of_product(this.props.id)
+        _create_comment_for_product({
+            ...this.state,
+            id: this.props.id
+        })
+        this.reload(this.props.id)
     }
 
     render() {
@@ -202,7 +206,7 @@ class BlogSingle extends Component {
         if (created_comment === true) {
             _create_comment_end()
         }
-
+        
         return (
             <div>
                 {alert}
