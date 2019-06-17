@@ -67,6 +67,7 @@ export const CART = {
     DELETE_CART: "DELETE_CART",
     DELETE_SUCCESS: "DELETE_SUCCESS",
     DELETE_FAIL: "DELETE_FAIL",
+    
 }
 export const ORDER = {
     //@CREATE order
@@ -83,7 +84,14 @@ export const USER = {
     //@get all user
     GET_ALL: "GET_ALL",
     GET_ALL_SUCCESS: "GET_ALL_SUCCESS",
-    GET_ALL_FAIL: "GET_ALL_FAIL"
-
+    GET_ALL_FAIL: "GET_ALL_FAIL",
+    //@get user ìinfo
+    GET_INFO: "GET_INFO",
+    GET_INFO_SUCCESS: "GET_INFO_SUCCESS",
+    GET_INFO_FAIL: "GET_INFO_FAIL",
+    //@get user ìinfo
+    UPDATE_INFO: "UPDATE_INFO",
+    UPDATE_INFO_SUCCESS: "UPDATE_INFO_SUCCESS",
+    UPDATE_INFO_FAIL: "UPDATE_INFO_FAIL"
 }
 

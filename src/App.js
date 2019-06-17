@@ -46,6 +46,7 @@ import {
     Redirect,
     HashRouter
 } from "react-router-dom";
+import Profile from "./containers/Profile";
 
 const cookies = new Cookies();
 
@@ -67,40 +68,45 @@ class App extends Component {
         let contact_us = () => <Header><Contact/></Header>
         let login = () => <Header><Login/></Header>
         let blog_single = ({ match }) => <Header><BlogSingle id={match.params.id}/></Header>
+        let profile = () => <Header> <Profile></Profile></Header>
         let routes = auth !== undefined
         ?
             <Switch>
                 <Route path="/" exact component={home} />
                 <Route path="/checkout" exact component={checkout} />
                 <Route path="/cart" exact component={cart} />
+                <Route path="/profile" exact component={profile} />
                 <Route path="/shop" exact component={shop} />
                 <Route path="/product-details" exact component={product_details} />
                 <Route path="/login" exact component={login} />
                 <Route path="/contact-us" exact component={contact_us} />
                 <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 
-                <Route path="/admin" exact component={admin}/>
-                <Route path="/admin/users" exact component={users}/>
-                <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route>
-                <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route>
-                <Redirect to="/admin"/>
+                {/* <Route path="/admin" exact component={admin}/> */}
+                {/* <Route path="/admin/users" exact component={users}/> */}
+                {/* <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route> */}
+                {/* <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route> */}
+                <Redirect to="/login"/>
             </Switch> 
         
         : <Switch>
             <Route path="/" exact component={home} />
             <Route path="/checkout" exact component={Checkout} />
-            <Route path="/cart" exact component={Cart} />
-            <Route path="/shop" exact component={Shop} />
+            <Route path="/cart" exact component={Login} />
+
+            <Route path="/profile" exact component={Login} />
+
             <Route path="/product-details" exact component={ProductDetails} />
             <Route path="/login" exact component={Login} />
             <Route path="/contact-us" exact component={Contact} />
             <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 
             <Route path="/signin" exact component={SingIn} />
-            <Route path="/signup" exact component={SingUp}/>
             <Route path="/admin" exact component={SingIn}/>
             <Redirect to="/"/>  
         </Switch>
+
+
         return (
             <div>
                 {

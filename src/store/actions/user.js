@@ -19,3 +19,45 @@ export const get_all_user_fail = (error) => {
         error: error
     }
 }
+
+export const get_user_info = (id) => {
+    return {
+        type: USER.GET_INFO,
+        id: id
+    }
+}
+
+export const get_user_info_success = (data) => {
+    return {
+        type: USER.GET_INFO_SUCCESS,
+        data: data
+    }
+}
+
+export const get_user_info_fail = (error) => {
+    return {
+        type: USER.GET_INFO_FAIL,
+        error: error
+    }
+}
+
+export const update_user_info = (data) => {
+    return {
+        type: USER.UPDATE_INFO,
+        data: data
+    }
+}
+
+export const update_user_info_success = (data) => {
+    return {
+        type: USER.UPDATE_INFO_SUCCESS,
+        data: data
+    }
+}
+
+export const update_user_info_fail = (error) => {
+    return {
+        type: USER.UPDATE_INFO_FAIL,
+        error: error
+    }
+}

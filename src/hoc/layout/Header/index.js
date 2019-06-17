@@ -56,10 +56,11 @@ class Header extends Component {
                                 <div className="col-sm-8">
                                     <div className="shop-menu pull-right">
                                         <ul className="nav navbar-nav">
-                                            <li><a href="#"><i className="fa fa-user" /> Account</a></li>
-                                            <li><a href="#"><i className="fa fa-star" /> Wishlist</a></li>
                                             <li>
-                                                <Link to="/checkout"><i className="fa fa-crosshairs" /> Checkout</Link>
+                                                <Link to="/profile"><i className="fa fa-crosshairs" /> Account</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/checkout"><i className="fa fa-crosshairs" /> Order</Link>
                                             </li>
                                             <li>
                                                 <Link to="/cart"><i className="fa fa-shopping-cart" /> Cart</Link>

@@ -8,13 +8,15 @@ import auth_reducer from "./store/reducers/auth";
 import product_reducer from './store/reducers/product'
 import cart_reducer from './store/reducers/cart';
 import search_reducer from './store/reducers/search'
+import user_reducer from './store/reducers/user'
 import rootSaga from './middleware/root_saga';
 
 const rootReducer = combineReducers({
     auth: auth_reducer,
     product: product_reducer,
     carts: cart_reducer,
-    search: search_reducer
+    search: search_reducer,
+    user: user_reducer
 });
 
 const sagaMiddleware = createSagaMiddleware()
