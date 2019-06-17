@@ -6,6 +6,7 @@ const intialization_state = {
     is_deleted: null,
     is_updated: null,
     product_top: null,
+    product: null,
     data: null,
     error: null
 }
@@ -124,7 +125,7 @@ function get_product_by_id_success(state, action) {
     return {
         ...state,
         is_loading: false,
-        data: action.data
+        product: action.data
     }
 }
 

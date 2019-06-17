@@ -16,7 +16,7 @@ import {
 
 function* handler_create_cart(action) {
     const datareq = {
-        "amount": action.data.amount,
+        "amount": 1,
         "product_id": action.data.id,
         "user_id": "1"
     }

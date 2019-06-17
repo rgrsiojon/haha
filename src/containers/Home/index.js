@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Home from '../../components/Home'
 import { get_all_product, get_top_product } from './../../store/actions/product'
-import { create_cart } from './../../store/actions/cart'
+import { create_cart, create_cart_end } from './../../store/actions/cart'
 
 const map_state_to_props = state => ({
     product: state.product,
@@ -17,6 +17,9 @@ const map_dispatch_to_props = dispatch => ({
     },
     _get_top_product: function() {
         dispatch(get_top_product())
+    },
+    _create_cart_end: function() {
+        dispatch(create_cart_end())
     }
 })
 

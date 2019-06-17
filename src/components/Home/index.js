@@ -5,6 +5,31 @@ import Filter from './../Filter'
 import Loading from './../Loading'
 import Alert from './../Alert'
 
+class Recommended extends Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        let product_top = this.props.data
+        return product_top !== null ? product_top.slice(5, 8).map(i => {
+            return <> 
+                 <div className="col-sm-4">
+                    <div className="product-image-wrapper">
+                        <div className="single-products">
+                            <div className="productinfo text-center">
+                                <img src={i.avatar} alt />
+                                <h2>{i.price}</h2>
+                                <p>{i.title}</p>
+                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        }): <div></div>
+    }
+}
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -23,13 +48,16 @@ class Home extends Component {
     }
 
     render() {
-        let { is_loading, data, product_top } = this.props.product   
+        let { is_loading, data, product_top, is_created } = this.props.product  
+        let { _create_cart_end } = this.props
+        
         let cart = this.props.carts
-        console.log(this.props.product)
-        let alert = cart.is_created === true 
+        console.log(cart)
+        if(cart.is_created === true) {
+            _create_cart_end()
+        }
+        let alert = cart.is_loading === true 
                     ? <Alert class="my--alert--secon">Add product to cart is success</Alert> 
-                    : cart.is_created === false
-                    ? <Alert class="my--alert--deger">Add product to cart is fail</Alert> 
                     : <div></div>
         return (
             <>
@@ -68,80 +96,10 @@ class Home extends Component {
                                     <div id="recommended-item-carousel" className="carousel slide" data-ride="carousel">
                                         <div className="carousel-inner">
                                             <div className="item active">
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend1.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend2.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend3.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <Recommended data={product_top} ></Recommended>
                                             </div>
                                             <div className="item">
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend1.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend2.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-sm-4">
-                                                    <div className="product-image-wrapper">
-                                                        <div className="single-products">
-                                                            <div className="productinfo text-center">
-                                                                <img src="images/home/recommend3.jpg" alt />
-                                                                <h2>$56</h2>
-                                                                <p>Easy Polo Black Edition</p>
-                                                                <a href="#" className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <Recommended data={product_top} ></Recommended>
                                             </div>
                                         </div>
                                         <a className="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './../Loading'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Products extends Component {
     constructor(props) {
@@ -49,7 +50,6 @@ class Products extends Component {
 
     render() {
         var data_product = null
-        // var data_demo = null
         
         if(this.props.data !== null) {
             switch (this.state.page) {
@@ -81,13 +81,14 @@ class Products extends Component {
                                 }} className="btn btn-default add-to-cart"><i className="fa fa-shopping-cart" />Add to cart</button>
                                 </div>
                             </div>
-                            {/* <img src="images/home/sale.png" class="new"></img> */}
+                            
                             <img src="images/home/new.png" class="new"></img>
                         </div>
                         <div className="choose">
                             <ul className="nav nav-pills nav-justified">
-                                <li><a href="#"><i className="fa fa-plus-square" />Add to wishlist</a></li>
-                                <li><a href="#"><i className="fa fa-plus-square" />Add to compare</a></li>
+                                <li>
+                                    <Link to={`/product/macbook/`+i.id}>Chi tiết sản phẩm</Link>
+                                </li>
                             </ul>
                         </div>
                     </div>

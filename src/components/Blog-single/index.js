@@ -1,70 +1,89 @@
 import React, { Component } from 'react'
+import Loading from './../Loading'
+
+class Blog extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        let product = this.props.data
+        console.log(product)
+        return (
+            <div className="blog-post-area">
+                <h2 className="title text-center">Latest From our Blog</h2>
+                <div className="single-blog-post">
+                    <h3>Girls Pink T Shirt arrived in store</h3>
+                    <div className="post-meta">
+                        <ul>
+                            <li><i className="fa fa-user" /> Mac</li>
+                        </ul>
+                        <span>
+                            <i className="fa fa-star" />
+                            <i className="fa fa-star" />
+                            <i className="fa fa-star" />
+                            <i className="fa fa-star" />
+                            <i className="fa fa-star-half-o" />
+                        </span>
+                    </div>
+                    <a href>
+                        <img src={product.avatar} alt />
+                    </a>
+                    <p>{product.description}</p> <br />
+                    <div className="pager-area">
+                        <ul className="pager pull-right">
+                            <li><a href="#">Pre</a></li>
+                            <li><a href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>              
+        )
+    }
+}
 
 class BlogSingle extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        let { _get_product_by_id } = this.props
+        _get_product_by_id(this.props.id)
+    }
+
     render() {
+        let { is_loading, product } = this.props.product
         return (
             <div>
                 <section>
                     <div className="container">
                         <div className="row">
-                            
+
                             <div className="col-sm-3">
                                 <div className="left-sidebar">
                                     <div className="brands_products">{/*brands_products*/}
-                                        <h2>Brands</h2>
+                                        <h2> Danh mục</h2>
                                         <div className="brands-name">
                                             <ul className="nav nav-pills nav-stacked">
-                                                <li><a href> <span className="pull-right">(50)</span>Acne</a></li>
-                                                <li><a href> <span className="pull-right">(56)</span>Grüne Erde</a></li>
-                                                <li><a href> <span className="pull-right">(27)</span>Albiro</a></li>
-                                                <li><a href> <span className="pull-right">(32)</span>Ronhill</a></li>
-                                                <li><a href> <span className="pull-right">(5)</span>Oddmolly</a></li>
-                                                <li><a href> <span className="pull-right">(9)</span>Boudestijn</a></li>
-                                                <li><a href> <span className="pull-right">(4)</span>Rösch creative culture</a></li>
+                                                <li><a href> <span className="pull-right">(50)</span>Macbook pro</a></li>
+                                                <li><a href> <span className="pull-right">(56)</span>Macbook Ari</a></li>
+                                                <li><a href> <span className="pull-right">(27)</span>Macbook</a></li>
+                                                <li><a href> <span className="pull-right">(32)</span>Mac Mini</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div className="col-sm-9">
-                                <div className="blog-post-area">
-                                    <h2 className="title text-center">Latest From our Blog</h2>
-                                    <div className="single-blog-post">
-                                        <h3>Girls Pink T Shirt arrived in store</h3>
-                                        <div className="post-meta">
-                                            <ul>
-                                                <li><i className="fa fa-user" /> Mac Doe</li>
-                                                <li><i className="fa fa-clock-o" /> 1:33 pm</li>
-                                                <li><i className="fa fa-calendar" /> DEC 5, 2013</li>
-                                            </ul>
-                                            <span>
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star" />
-                                                <i className="fa fa-star-half-o" />
-                                            </span>
-                                        </div>
-                                        <a href>
-                                            <img src="images/blog/blog-one.jpg" alt />
-                                        </a>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <br />
-                                        <p>
-                                            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> <br />
-                                        <p>
-                                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p> <br />
-                                        <p>
-                                            Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                    </p>
-                                        <div className="pager-area">
-                                            <ul className="pager pull-right">
-                                                <li><a href="#">Pre</a></li>
-                                                <li><a href="#">Next</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>{/*/blog-post-area*/}
+                                {
+                                    product !== null 
+                                    ? 
+                                    <Blog data={product}></Blog>
+                                    : <Loading></Loading>
+                                }
+                                
                                 <div className="rating-area">
                                     <ul className="ratings">
                                         <li className="rate-this">Rate this item:</li>
@@ -79,9 +98,8 @@ class BlogSingle extends Component {
                                     </ul>
                                     <ul className="tag">
                                         <li>TAG:</li>
-                                        <li><a className="color" href>Pink <span>/</span></a></li>
-                                        <li><a className="color" href>T-Shirt <span>/</span></a></li>
-                                        <li><a className="color" href>Girls</a></li>
+                                        <li><a className="color" href>Mac <span>/</span></a></li>
+                                        <li><a className="color" href>Macbook Pro <span>/</span></a></li>
                                     </ul>
                                 </div>{/*/rating-area*/}
                                 <div className="socials-share">

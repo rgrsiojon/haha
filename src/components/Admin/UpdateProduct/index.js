@@ -104,64 +104,70 @@ class CreateProduct extends Component {
         let { update_product } = this.props
         update_product({...this.state, id: this.id})
     }
+
+    componentDidMount() {
+        let { _get_product_by_id } = this.props
+        console.log("compoment did mount")
+        _get_product_by_id(this.props.id)
+    }
     
     render() {
-
-        let { is_loading, data, is_updated } = this.props.product
-        this.id = data.id ? data.id: "" 
-        const title = <div className="row form-group">
+        console.log(this.props)
+        let { is_loading, product, is_updated } = this.props.product
+        // this.id = product.id ? product.id: "" 
+        const title = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="text-input" className=" form-control-label">Title</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input onChange={this.handler_title} type="text" id="text-input" name="text-input" placeholder="Name" value={ data.title ? data.title: "" } className="form-control" />
+                            <input onChange={this.handler_title} type="text" id="text-input" name="text-input" placeholder="Name" value={ product.title ? product.title: "" } className="form-control" />
                             <small className="form-text text-muted">This is a help text</small>
                         </div>
-                    </div>
+                    </div>: <div></div>
 
-        const descript =  <div className="row form-group">
+        const descript = product !== null ? <div className="row form-group">
                             <div className="col col-md-3">
                                 <label htmlFor="textarea-input" className=" form-control-label">Description</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <textarea onChange={this.handler_descript}  value={ data.description ? data.description: "" } name="textarea-input" id="textarea-input" rows={9} placeholder="Content..." eclassName="form-control" defaultValue={""} />
+                                <textarea onChange={this.handler_descript}  value={ product.description ? product.description: "" } name="textarea-input" id="textarea-input" rows={9} placeholder="Content..." eclassName="form-control" defaultValue={""} />
                             </div>
-                        </div>
-        const cpu = <div className="row form-group">
+                        </div>: <div></div>
+        const cpu = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="email-input" className=" form-control-label">CPU</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input onChange={this.handler_cpu} value={ data.cpu ? data.cpu: "" } className="form-control" />
+                            <input onChange={this.handler_cpu} value={ product.cpu ? product.cpu: "" } className="form-control" />
                             <small className="help-block form-text">Please enter your cpu</small>
                         </div>
-                    </div>
-        const display = <div className="row form-group">
+                    </div>: <div></div>
+        const display = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="disabled-input" className=" form-control-label">Display</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ data.display ? data.display: "" }  onChange={this.handler_display} type="text" id="disabled-input" name="disabled-input" placeholder="Display" className="form-control" />
+                            <input value={ product.display ? product.display: "" }  onChange={this.handler_display} type="text" id="disabled-input" name="disabled-input" placeholder="Display" className="form-control" />
                         </div>
-                    </div>
-        const gpu = <div className="row form-group">
+                    </div>: <div></div>
+        const gpu = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="disabled-input" className=" form-control-label">GPU</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ data.gpu ? data.gpu: "" }  onChange={this.handler_gpu} type="text" id="disabled-input" name="disabled-input" placeholder="GPU" className="form-control" />
+                            <input value={ product.gpu ? product.gpu: "" }  onChange={this.handler_gpu} type="text" id="disabled-input" name="disabled-input" placeholder="GPU" className="form-control" />
                         </div>
-                    </div>
-        const disk = <div className="row form-group">
+                    </div>: <div></div>
+        const disk = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="disabled-input" className=" form-control-label">Disk</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ data.disk ? data.disk: "" }  onChange={this.handler_disk} type="text" id="disabled-input" name="disabled-input" placeholder="Disk" className="form-control" />
+                            <input value={ product.disk ? product.disk: "" }  onChange={this.handler_disk} type="text" id="disabled-input" name="disabled-input" placeholder="Disk" className="form-control" />
                         </div>
-                 </div>
+                 </div>: <div></div>
 
-        const ram = <div className="card-body card-block">
+        const ram = product !== null ?  <div className="card-body card-block">
                     <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="select" className=" form-control-label">RAM</label>
@@ -174,45 +180,45 @@ class CreateProduct extends Component {
                             </select>
                         </div>
                     </div>
-                </div>
-        const color = <div className="card-body card-block">
+                </div> : <div></div>
+        const color =  product !== null ? <div className="card-body card-block">
                         <div className="row form-group">
                             <div className="col col-md-3">
                                 <label htmlFor="select" className=" form-control-label">COLOR</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <select value={ data.color ? data.color: "" } onChange={this.handler_color} name="select" id="select" className="form-control">
+                                <select value={ product.color ? product.color: "" } onChange={this.handler_color} name="select" id="select" className="form-control">
                                     <option value="gray">Gray</option>
                                     <option value="white">White</option>
                                     <option value="gold">Gold</option>
                                 </select>
                             </div>
                         </div>
-                    </div>
-        const amount = <div className="row form-group">
+                    </div> : <div></div>
+        const amount =  product !== null ? <div className="row form-group">
                             <div className="col col-md-3">
                                 <label htmlFor="disabled-input" className=" form-control-label">Amount</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input value={ data.amount ? data.amount: "" } onChange={this.handler_amount} type="number" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
+                                <input value={ product.amount ? product.amount: "" } onChange={this.handler_amount} type="number" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
                             </div>
-                    </div>
-        const price = <div className="row form-group">
+                    </div>: <div></div>
+        const price =  product !== null ? <div className="row form-group">
                             <div className="col col-md-3">
                                 <label htmlFor="disabled-input" className=" form-control-label">Price</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input value={ data.price ? data.price: "" } onChange={this.handler_price} type="number" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
+                                <input value={ product.price ? product.price: "" } onChange={this.handler_price} type="number" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
                             </div>
-                    </div>
-        const image = <div className="row form-group">
+                    </div> : <div></div>
+        const image = product !== null ?  <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="file-multiple-input" className=" form-control-label">Image</label>
                         </div>
                         <div className="col-12 col-md-9">
                             <input onChange={this.handler_avatar} ref={this.input_file_image} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
                         </div>
-                    </div>
+                    </div>: <div></div>
         const submit = <div className="card-footer">
                             <button onClick={this.handler_button_submit} type="submit" className="btn btn-success btn-sm">
                                 <i className="fa fa-dot-circle-o" /> Update

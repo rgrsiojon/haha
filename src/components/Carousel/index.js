@@ -9,7 +9,7 @@ class Carousel extends Component {
     render() {
         var product = null
         if (this.props.data !== null) {
-            product =  this.props.data.map((item, index) => {
+            product =  this.props.data.slice(0, 3).map((item, index) => {
                 return <div className={`item ${(index === 0)? "active" : ""}`}>
                             <div className="col-sm-6">
                                 <h1><span>E</span>-MAC</h1>

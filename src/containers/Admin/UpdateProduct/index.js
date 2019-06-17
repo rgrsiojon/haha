@@ -14,8 +14,12 @@ const mapDispatchToProps = dispatch => ({
             data: data
         })
     },
-
-
+    _get_product_by_id: function(id) {
+        dispatch({ 
+            type: PRODUCT.GET_PRODUCT_BY_ID,
+            id: id
+        })
+    }
 })
 
 export default connect(
