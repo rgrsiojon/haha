@@ -13,9 +13,30 @@ export const auth_login_success = (data) => {
     }
 };
 
-export const auth_login_fail = (data) => {
+export const auth_login_fail = (error) => {
     return {
         type: AUTH.LOGIN_FAIL,
-        error: Error(data)
+        error: error
+    }
+};
+
+export const register = (data) => {
+    return{
+        type: AUTH.REGISTER,
+        data: data
+    }
+};
+
+export const register_success = (data) => {
+    return{
+        type: AUTH.REGISTER_SUCCESS,
+        data: data
+    }
+};
+
+export const register_fail = (error) => {
+    return {
+        type: AUTH.REGISTER_FAIL,
+        error: error
     }
 };

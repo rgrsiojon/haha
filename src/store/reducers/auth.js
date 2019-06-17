@@ -4,31 +4,24 @@ const cookies = new Cookies();
 
 //@initialization state
 const initial_state = {
-    loading: false,
-    error: {
-        message:""
-    },
+    loading: null,
+    error: null,
     data: cookies.get('auth')
 }
 
 //@create mothod
 const user_start = (state, action) => {
     return { 
-        loading: true,
-        error: {
-            message:""
-        },
-        data: {}
+        ...state,
+        loading: true
     }
 }
 
 //@login success
 const user_login_success = (state, action) => {
     return { 
+        ...state,
         loading: false,
-        error: {
-            message:""
-        },
         data: action.data
     }
 }
@@ -36,14 +29,34 @@ const user_login_success = (state, action) => {
 //@login fail
 const user_login_fail = (state, action) => {
     return { 
+        ...state,
         loading: false,
-        error: {
-            message: action.error, 
-        },
-        data: {}
+        error: action.error
     }
 }
 
+const register = (state, action) => {
+    return {
+        ...state,
+        loading: true,
+    }
+}
+
+const register_success = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        data: action.data
+    }
+}
+
+const register_fail = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        error: action.error
+    }
+}
 //@compare to return
 export default (state = initial_state, action) => {
     switch (action.type) {
@@ -53,6 +66,12 @@ export default (state = initial_state, action) => {
             return user_login_success(state, action)
         case AUTH.LOGIN_FAIL:
             return user_login_fail(state, action)
+        case AUTH.REGISTER:
+            return register(state, action)
+        case AUTH.REGISTER_SUCCESS:
+            return register_success(state, action)
+        case AUTH.REGISTER_FAIL:
+            return register_fail(state, action)
         default:
             return state
     }
