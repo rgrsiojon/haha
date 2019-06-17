@@ -35,7 +35,6 @@ const user_login_success = (state, action) => {
 
 //@login fail
 const user_login_fail = (state, action) => {
-    console.log(action)
     return { 
         loading: false,
         error: {

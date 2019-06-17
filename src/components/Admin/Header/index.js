@@ -6,9 +6,7 @@ class Header extends Component {
         this.state = {
             is_show_menu: false
         }
-
         this.handler_show_tab_menu = this.handler_show_tab_menu.bind(this)
-
     }
 
     handler_show_tab_menu() {
@@ -21,8 +19,6 @@ class Header extends Component {
         console.log(this.props.auth)
         let { id, avatar, email } = this.props.auth.data
         let class_dropdown = this.state.is_show_menu ? "show-dropdown" : "" 
-
-        console.log(this.state)
 
         return (
             <header className="header-desktop">

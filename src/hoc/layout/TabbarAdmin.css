@@ -1,0 +1,18 @@
+.header-desktop {
+    left: 200px;
+} 
+.menu-sidebar { 
+    width: 200px;
+} 
+
+.page-container { 
+    padding-left: 200px; 
+}
+
+.close:hover {
+    color: red;
+}
+
+.close {
+    float: none;
+}
