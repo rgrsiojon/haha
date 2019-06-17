@@ -68,3 +68,22 @@ export const delete_fail = (error) => {
     }
 }
 
+export const update_mount_cart = (data) => {
+    return {
+        type: CART.UPDATE_MOUNT_CART,
+        data: data
+    }
+}
+
+export const update_mount_success = (data) => {
+    return {
+        type: CART.UPDATE_MOUNT_CART_SUCCESS
+    }
+}
+
+export const update_mount_fail = (error) => {
+    return {
+        type: CART.UPDATE_MOUNT_CART_FAIL
+    }
+}
+

@@ -6,9 +6,13 @@ class Cart extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            total: 0
+            total: 0,
+            amount_up: 0,
+            amount_dow: 0
         }
         this.handler_total = this.handler_total.bind(this)
+        this.handler_up_amout = this.handler_up_amout.bind(this)
+        this.handler_down_amout = this.handler_down_amout.bind(this)
     }
 
     componentDidMount() {
@@ -28,6 +32,34 @@ class Cart extends Component {
         _delete_cart_by_id(id)
         get_all_carts()
         get_all_products()
+    }
+
+    handler_up_amout(num, id) {
+        
+        if(num + 1 > 10) {
+            return false
+        }
+        let { get_all_carts, _update_amount_cart, get_all_products } = this.props
+        _update_amount_cart({
+            id: id,
+            amount: num + 1
+        })
+        get_all_carts()
+        get_all_products()
+    }
+
+    handler_down_amout(num, id) {
+        console.log(num)
+        if(num == 1) {
+            return false
+        }
+        let { get_all_carts, _update_amount_cart } = this.props
+        _update_amount_cart({
+            id: id,
+            amount: num - 1
+        })
+        
+        get_all_carts()
     }
 
     render() {
@@ -57,15 +89,20 @@ class Cart extends Component {
                 <td className="cart_price">
                     <p>{item[0].price}</p>
                 </td>
-                <td className="cart_quantity">
+                <td className="cart_quantity" style={{width: 140}}>
                     <div className="cart_quantity_button">
-                        <a className="cart_quantity_up" href> + </a>
-                        <input className="cart_quantity_input" style={{ width: 53 }} type="text" name="quantity" defaultValue={carts.data[index].amount} />
-                        <a className="cart_quantity_down" href> - </a>
+                        <a onClick= {() => {
+                            this.handler_up_amout(carts.data[index].amount, carts.data[index].id)
+                        }} className="cart_quantity_up" href> + </a>
+
+                        <p style={{transform: "translateX(-20px)", display: "inline-block"}}>{carts.data[index].amount}</p>
+                        <a style={{transform: "translateX(30px)"}} onClick={()=>{
+                            this.handler_down_amout(carts.data[index].amount, carts.data[index].id)
+                        }} className="cart_quantity_down" href> - </a>
                     </div>
                 </td>
                 <td className="cart_total">
-                    <p className="cart_total_price"> {item[0].price * carts.data[index].amount} VND</p>
+                    <p className="cart_total_price"> {item[0].price * (carts.data[index].amount + this.state.amount_up)} VND</p>
                 </td>
                 <td className="cart_delete">
                     <a onClick={() => {
@@ -88,7 +125,7 @@ class Cart extends Component {
         let { _create_end } = this.props
         let cart = this.props.carts
         let alert_cart = cart.is_loading === true
-            ? <Alert class="my--alert--deger">Deleted product</Alert>
+            ? <Loading></Loading>
             : <div></div>
         if (cart.is_deleted === true) {
             _create_end()

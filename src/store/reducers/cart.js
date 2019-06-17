@@ -86,6 +86,29 @@ function delete_cart_fail(state, action) {
     }
 }
 
+function update_mount_cart(state, action) {
+    return {
+        ...state, 
+        is_loading: true,
+    }
+}
+
+function update_mount_success(state, action) {
+    return {
+        ...state, 
+        is_loading: false,
+        is_created: null,
+        is_deleted: null,
+    }
+}
+
+function update_mount_cart_fail(state, action) {
+    return {
+        ...state,
+        is_loading: false
+    }
+}
+
 export default (state = initialization, action) => {
     switch (action.type) {
         //@ Create cart
@@ -111,6 +134,13 @@ export default (state = initialization, action) => {
             return delete_cart_success(state, action)
         case CART.DELETE_FAIL:
             return delete_cart_fail(state, action)
+        //@ update mount cart
+        case CART.UPDATE_MOUNT_CART:
+            return update_mount_cart(state, action)
+        case CART.UPDATE_MOUNT_CART_SUCCESS:
+            return update_mount_success(state, action)
+        case CART.UPDATE_MOUNT_CART_FAIL:
+            return update_mount_cart_fail(state, action)
         default:
             return state
     }

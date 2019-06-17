@@ -3,7 +3,8 @@ import Cart from '../../components/Cart'
 import { 
     get_all_cart,
     delete_cart,
-    create_cart_end
+    create_cart_end,
+    update_mount_cart
 } from './../../store/actions/cart'
 import { get_all_product } from './../../store/actions/product'
 
@@ -27,8 +28,10 @@ const map_dispatch_to_props = dispatch => ({
     },
     _create_end: function() {
         dispatch(create_cart_end())
+    },
+    _update_amount_cart: function(data) {
+        dispatch(update_mount_cart(data))
     }
-    
 })
 
 export default connect(
