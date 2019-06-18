@@ -82,7 +82,7 @@ class App extends Component {
                 <Route path="/contact-us" exact component={contact_us} />
                 <Route path="/product/macbook/:id" exact component={blog_single}></Route>
                 <Route path="/admin" exact component={SingIn}/>
-                <Redirect to="/login"/>
+                <Redirect to="/"/>
             </Switch> 
         
         : <Switch>
