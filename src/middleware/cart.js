@@ -36,9 +36,9 @@ function* handler_create_cart(action) {
     }
 }
 
-function* handler_get_all_cart() {
+function* handler_get_all_cart(action) {
     try {
-        const data = yield axios.get('/api/auth/cart/1')
+        const data = yield axios.get(`/api/auth/cart/${action.id}`)
         .then(response => {
             return response.data
         }).catch(error => {

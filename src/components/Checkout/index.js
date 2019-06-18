@@ -17,8 +17,9 @@ class Checkout extends Component {
     }
     
     componentDidMount() {
+        let id_user = this.props.auth.data.id
         let { get_all_carts, get_all_products } = this.props
-        get_all_carts()
+        get_all_carts(id_user)
         get_all_products()
     }
 

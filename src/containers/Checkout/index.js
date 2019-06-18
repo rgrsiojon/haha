@@ -23,8 +23,8 @@ const map_dispatch_to_props = dispatch => ({
     _create_carts: function(data) {
         dispatch(create_cart(data))
     },
-    get_all_carts: function() {
-        dispatch(get_all_cart())
+    get_all_carts: function(id) {
+        dispatch(get_all_cart(id))
     },
     _delete_cart_by_id: function(id) {
         dispatch(delete_cart(id))

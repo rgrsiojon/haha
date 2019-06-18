@@ -27,9 +27,10 @@ export const create_cart_end = () => {
     }
 }
 
-export const get_all_cart = () => {
+export const get_all_cart = (id) => {
     return {
-        type: CART.GET_ALL_CART
+        type: CART.GET_ALL_CART,
+        id: id
     }
 }
 

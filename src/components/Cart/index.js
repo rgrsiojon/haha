@@ -17,8 +17,9 @@ class Cart extends Component {
     }
 
     componentDidMount() {
+        let id = this.props.auth.data.id
         let { get_all_carts, get_all_products } = this.props
-        get_all_carts()
+        get_all_carts(id)
         get_all_products()
     }
 
@@ -29,14 +30,15 @@ class Cart extends Component {
     }
 
     handler_delete_cart(id) {
+        let id_user = this.props.auth.data.id
         let { get_all_carts, get_all_products, _delete_cart_by_id } = this.props
         _delete_cart_by_id(id)
-        get_all_carts()
+        get_all_carts(id_user)
         get_all_products()
     }
 
     handler_up_amout(num, id) {
-        
+        let id_user = this.props.auth.data.id
         if(num + 1 > 10) {
             return false
         }
@@ -45,12 +47,12 @@ class Cart extends Component {
             id: id,
             amount: num + 1
         })
-        get_all_carts()
+        get_all_carts(id_user)
         get_all_products()
     }
 
     handler_down_amout(num, id) {
-        console.log(num)
+        let id_user = this.props.auth.data.id
         if(num == 1) {
             return false
         }
@@ -60,7 +62,7 @@ class Cart extends Component {
             amount: num - 1
         })
         
-        get_all_carts()
+        get_all_carts(id_user)
     }
 
     render() {
@@ -187,15 +189,3 @@ class Cart extends Component {
 }
 
 export default Cart;
-
-// {
-	
-// 	"total_pay": 10000000,
-// 	"shipping_address": "208 nguyen huu canh",
-// 	"array_id": [
-// 		{"id" : "12"},
-// 		{"id" : "10"},
-// 		{"id" : "11"}],
-// 	"user_id": "1",
-// 	"store_id" : "1"
-// }
