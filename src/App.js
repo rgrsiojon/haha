@@ -54,6 +54,7 @@ class App extends Component {
     render() {
         let { loading } = this.props.auth
         var auth = cookies.get('auth')
+        var admin_cookies = cookies.get('admin')
         //@ Admin
         let admin = () => <TabbarAdmin> <Admin/> </TabbarAdmin>
         let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
@@ -81,11 +82,6 @@ class App extends Component {
                 <Route path="/login" exact component={profile} />
                 <Route path="/contact-us" exact component={contact_us} />
                 <Route path="/product/macbook/:id" exact component={blog_single}></Route>
-
-                {/* <Route path="/admin" exact component={admin}/> */}
-                {/* <Route path="/admin/users" exact component={users}/> */}
-                {/* <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route> */}
-                {/* <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route> */}
                 <Redirect to="/login"/>
             </Switch> 
         
@@ -101,11 +97,19 @@ class App extends Component {
             <Route path="/contact-us" exact component={Contact} />
             <Route path="/product/macbook/:id" exact component={blog_single}></Route>
 
-            <Route path="/signin" exact component={SingIn} />
             <Route path="/admin" exact component={SingIn}/>
             <Redirect to="/"/>  
         </Switch>
-
+        
+        routes = admin_cookies !== undefined 
+        ? <Switch>
+            <Route path="/admin" exact component={admin}/>
+            <Route path="/admin/users" exact component={users}/>
+            <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route>
+            <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route>
+            <Redirect to="/admin"/>
+        </Switch> 
+        : routes
 
         return (
             <div>

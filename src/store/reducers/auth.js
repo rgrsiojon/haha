@@ -6,7 +6,9 @@ const cookies = new Cookies();
 const initial_state = {
     loading: null,
     error: null,
-    data: cookies.get('auth')
+    data: cookies.get('auth') !== undefined 
+        ? cookies.get('auth')
+        : cookies.get('admin')
 }
 
 //@create mothod

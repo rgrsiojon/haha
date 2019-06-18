@@ -24,9 +24,18 @@ function* handler_login_with_email(actions) {
     try {
         const data = yield axios.post("/api/staff/sign_in", datareq)
         .then(response => {
-            cookies.set('auth', response.data, { path: '/' });
+            if(actions.data.email === "hacnguyen1412@gmail.com") {
+                cookies.set('admin', response.data, { path: '/' });
+                cookies.remove('auth');
+            } else {
+                cookies.set('auth', response.data, { path: '/' });
+                cookies.remove('admin');
+            }
             return response.data
+        }).catch(error => {
+            return error
         })
+
         yield put(auth_login_success(data))
     } catch (err) {
         yield put(auth_login_fail(err))

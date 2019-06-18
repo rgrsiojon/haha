@@ -8,7 +8,9 @@ import {
     get_user_info_success,
     get_user_info_fail,
     update_user_info_fail,
-    update_user_info_success
+    update_user_info_success,
+    get_all_user_fail,
+    get_all_user_success
 } from './../store/actions/user'
 
 function* handler_get_user_info(action) {
@@ -55,7 +57,22 @@ function* handler_update_user_info(action) {
     }
 }
 
+function* handler_get_all_users() {
+    try {
+        const data = yield axios.get('/api/admin/user')
+        .then(response => {
+            return response.data
+        }).catch(err => {
+            return err
+        })
+        yield put(get_all_user_success(data))
+    } catch {
+        yield put(get_all_user_fail("Error"))
+    }
+}
+
 export function* user() {
     yield takeEvery(USER.GET_INFO, handler_get_user_info)
     yield takeEvery(USER.UPDATE_INFO, handler_update_user_info)
+    yield takeEvery(USER.GET_ALL, handler_get_all_users)
 }
