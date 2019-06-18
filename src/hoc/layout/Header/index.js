@@ -70,7 +70,7 @@ class Header extends Component {
                                                 <Link to="/profile"><i className="fa fa-crosshairs" /> Account</Link>
                                             </li>
                                             <li>
-                                                <Link to="/checkout"><i className="fa fa-crosshairs" /> Order</Link>
+                                                <Link to="/order"><i className="fa fa-crosshairs" /> Order</Link>
                                             </li>
                                             <li>
                                                 <Link to="/cart"><i className="fa fa-shopping-cart" /> Cart</Link>

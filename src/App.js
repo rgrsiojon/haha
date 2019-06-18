@@ -79,7 +79,6 @@ class App extends Component {
                 <Route path="/profile" exact component={profile} />
                 <Route path="/shop" exact component={shop} />
                 <Route path="/product-details" exact component={product_details} />
-                <Route path="/login" exact component={profile} />
                 <Route path="/contact-us" exact component={contact_us} />
                 <Route path="/product/macbook/:id" exact component={blog_single}></Route>
                 <Route path="/admin" exact component={SingIn}/>
