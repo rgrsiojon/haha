@@ -69,7 +69,7 @@ class Admin extends Component {
                 this.handler_total(pages)
             }
         }
-        console.log(data)
+        
         var products = data !== null 
         ?  data.slice(this.state.page * 9 - 9, this.state.page * 9).map(i => {
                 return(

@@ -2,26 +2,28 @@
 
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
-import { CART } from './../store/actions/types';
+import { ORDER } from './../store/actions/types';
 
 import {
-    create_order,
     create_order_fail,
     create_order_success
 } from './../store/actions/order'
 
-function* handler_create_cart(action) {
+function* handler_order_cart(action) {
+    console.log(action.data)
     const datareq = {
-        "total_pay": 10000000,
-        "shipping_address": "208 nguyen huu canh",
-        "array_id": [
-            {"id" : "4"},
-            {"id" : "5"},
-            {"id" : "7"}],
+        "shipping_address": action.data.shipping_address,
+        "phone": action.data.phone,
+        "array_id": action.data.array_id.map(i=> {
+            return {
+                "id": i.id
+            }
+        }),
         "user_id": "1",
         "store_id" : "1"
     }
-    
+    console.log(action.data)
+    console.log(datareq)
     try {
         const data = yield axios.post('/api/auth/order', datareq)
         .then(response => {
@@ -29,6 +31,7 @@ function* handler_create_cart(action) {
         }).catch(error => {
             return error
         })
+        console.log(data)
         yield put(create_order_success(data))
     } catch {
         yield put(create_order_fail("Error"))
@@ -36,7 +39,6 @@ function* handler_create_cart(action) {
 }
 
 export function* order_of_production() {
-    yield takeEvery(CART.CREATE_CART, handler_create_cart)
-    yield takeEvery(CART.GET_ALL_CART, handler_get_all_cart)
+    yield takeEvery(ORDER.CREATE_ORDER, handler_order_cart)
 
 }

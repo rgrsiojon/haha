@@ -1,242 +1,207 @@
 import React, { Component } from 'react';
+import Loading from './../Loading';
+import Alert from './../Alert'
 
 class Checkout extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            total: 0,
+            shipping_address: "",
+            phone: 0
+        }
+        this.handler_total = this.handler_total.bind(this)
+        this.handler_change_shipping_address = this.handler_change_shipping_address.bind(this)
+        this.handler_create_order = this.handler_create_order.bind(this)
+        this.handler_change_phone = this.handler_change_phone.bind(this)
+    }
+    
+    componentDidMount() {
+        let { get_all_carts, get_all_products } = this.props
+        get_all_carts()
+        get_all_products()
+    }
+
+    handler_total(total) {
+        this.setState({
+            total: total
+        })
+    }
+
+    handler_change_shipping_address(e) {
+        this.setState({
+            shipping_address: e.target.value
+        })
+    }
+
+    handler_change_phone(e) {
+        this.setState({
+            phone: e.target.value
+        })
+    }
+
+    handler_create_order() {
+        let carts = this.props.carts
+        
+        const data = {
+            total_pay: this.state.total,
+            shipping_address: this.state.shipping_address,
+            phone: this.state.phone,
+            array_id: carts.data,
+            user_id: this.props.auth.data.id
+        }
+
+        let { _create_order } = this.props
+        _create_order(data)
+
+    }
+
+
     render() {
+        let carts = this.props.carts
+        let order = this.props.order
+        let product = this.props.product
+        let data_result = (product.data !== null && carts.data !== null) 
+        ? carts.data.map((item_cart) => {
+            return product.data !== null 
+                ? product.data.filter(item_product => {
+                return item_cart.product_id === item_product.id
+            }) : null
+        })
+        : null
+
+        let list_cart = data_result !== null 
+        ? data_result.map((item, index) => {
+            return <tr>
+                <td style={{ width: 300}}>
+                    <a>
+                        <img width="110px" src={item[0].avatar} alt />
+                    </a>
+                    
+                </td>
+                <td style={{width: 408}}>
+                    <span>{item[0].title}</span>
+                </td>
+                <td className="cart_price">
+                    <p>{item[0].price}</p>
+                </td>
+                <td className="cart_quantity">
+                    <div className="cart_quantity_button">
+                        <p className="text-center" >{carts.data[index].amount}</p>
+                    </div>
+                </td>
+                <td className="cart_total">
+                    <p className="cart_total_price"> {item[0].price * (carts.data[index].amount)} VND</p>
+                </td>
+            </tr>
+        }) : <Loading></Loading>
+
+        let total = data_result !== null 
+        ? data_result.reduce(function(total, currentValue, currentIndex, arr) {
+            return currentValue[0].price * carts.data[currentIndex].amount + total
+        }, 0)
+        : 0
+
+        if(total !== this.state.total) {
+            this.handler_total(total)
+        }
+
+        let alert = (order.is_loading === false)
+        ? <Alert class="my--alert--secon">Thành công</Alert> 
+        : <div></div>
+        
         return (
-            <>
-                
-                <section id="cart_items">
-                    <div className="container">
-                        <div className="breadcrumbs">
-                            <ol className="breadcrumb">
-                                <li><a href="#">Home</a></li>
-                                <li className="active">Check out</li>
-                            </ol>
-                        </div>{/*/breadcrums*/}
-                        <div className="step-one">
-                            <h2 className="heading">Step1</h2>
-                        </div>
-                        <div className="checkout-options">
-                            <h3>New User</h3>
-                            <p>Checkout options</p>
-                            <ul className="nav">
-                                <li>
-                                    <label><input type="checkbox" /> Register Account</label>
-                                </li>
-                                <li>
-                                    <label><input type="checkbox" /> Guest Checkout</label>
-                                </li>
-                                <li>
-                                    <a href><i className="fa fa-times" />Cancel</a>
-                                </li>
-                            </ul>
-                        </div>{/*/checkout-options*/}
-                        <div className="register-req">
-                            <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
-                        </div>{/*/register-req*/}
-                        <div className="shopper-informations">
-                            <div className="row">
-                                <div className="col-sm-3">
-                                    <div className="shopper-info">
-                                        <p>Shopper Information</p>
-                                        <form>
-                                            <input type="text" placeholder="Display Name" />
-                                            <input type="text" placeholder="User Name" />
-                                            <input type="password" placeholder="Password" />
-                                            <input type="password" placeholder="Confirm password" />
-                                        </form>
-                                        <a className="btn btn-primary" href>Get Quotes</a>
-                                        <a className="btn btn-primary" href>Continue</a>
-                                    </div>
-                                </div>
-                                <div className="col-sm-5 clearfix">
-                                    <div className="bill-to">
-                                        <p>Bill To</p>
-                                        <div className="form-one">
+            <>    
+                {
+                    order.is_loading == true 
+                    ? <Loading></Loading>
+                    : <> 
+                    {alert}
+                    <section id="cart_items">
+                        <div className="container">
+                            <div className="breadcrumbs">
+                                <ol className="breadcrumb">
+                                    <li><a href="#">Home</a></li>
+                                    <li className="active">Check out</li>
+                                </ol>
+                            </div>{/*/breadcrums*/}
+                            
+                            <div className="register-req">
+                                <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
+                            </div>{/*/register-req*/}
+                            <div className="shopper-informations">
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <div className="shopper-info">
+                                            <p>Shopper Information</p>
                                             <form>
-                                                <input type="text" placeholder="Company Name" />
-                                                <input type="text" placeholder="Email*" />
-                                                <input type="text" placeholder="Title" />
-                                                <input type="text" placeholder="First Name *" />
-                                                <input type="text" placeholder="Middle Name" />
-                                                <input type="text" placeholder="Last Name *" />
-                                                <input type="text" placeholder="Address 1 *" />
-                                                <input type="text" placeholder="Address 2" />
+                                                <input onChange={this.handler_change_shipping_address} type="Địa chỉ" placeholder="Address" />
+                                                <input onChange={this.handler_change_phone} type="number" placeholder="Phone" />
+                                                <input type="text" placeholder="User Name or Email" />
+                                                <input type="password" placeholder="Password" />
                                             </form>
-                                        </div>
-                                        <div className="form-two">
-                                            <form>
-                                                <input type="text" placeholder="Zip / Postal Code *" />
-                                                <select>
-                                                    <option>-- Country --</option>
-                                                    <option>United States</option>
-                                                    <option>Bangladesh</option>
-                                                    <option>UK</option>
-                                                    <option>India</option>
-                                                    <option>Pakistan</option>
-                                                    <option>Ucrane</option>
-                                                    <option>Canada</option>
-                                                    <option>Dubai</option>
-                                                </select>
-                                                <select>
-                                                    <option>-- State / Province / Region --</option>
-                                                    <option>United States</option>
-                                                    <option>Bangladesh</option>
-                                                    <option>UK</option>
-                                                    <option>India</option>
-                                                    <option>Pakistan</option>
-                                                    <option>Ucrane</option>
-                                                    <option>Canada</option>
-                                                    <option>Dubai</option>
-                                                </select>
-                                                <input type="password" placeholder="Confirm password" />
-                                                <input type="text" placeholder="Phone *" />
-                                                <input type="text" placeholder="Mobile Phone" />
-                                                <input type="text" placeholder="Fax" />
-                                            </form>
+                                            <a onClick={this.handler_create_order} className="btn btn-primary" href>Xác nhận thanh toán</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-sm-4">
-                                    <div className="order-message">
-                                        <p>Shipping Order</p>
-                                        <textarea name="message" placeholder="Notes about your order, Special Notes for Delivery" rows={16} defaultValue={""} />
-                                        <label><input type="checkbox" /> Shipping to bill address</label>
-                                    </div>
+                                    
                                 </div>
                             </div>
-                        </div>
-                        <div className="review-payment">
-                            <h2>Review &amp; Payment</h2>
-                        </div>
-                        <div className="table-responsive cart_info">
-                            <table className="table table-condensed">
-                                <thead>
-                                    <tr className="cart_menu">
-                                        <td className="image">Item</td>
-                                        <td className="description" />
-                                        <td className="price">Price</td>
-                                        <td className="quantity">Quantity</td>
-                                        <td className="total">Total</td>
-                                        <td />
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td className="cart_product">
-                                            <a href><img src="images/cart/one.png" alt /></a>
-                                        </td>
-                                        <td className="cart_description">
-                                            <h4><a href>Colorblock Scuba</a></h4>
-                                            <p>Web ID: 1089772</p>
-                                        </td>
-                                        <td className="cart_price">
-                                            <p>$59</p>
-                                        </td>
-                                        <td className="cart_quantity">
-                                            <div className="cart_quantity_button">
-                                                <a className="cart_quantity_up" href> + </a>
-                                                <input className="cart_quantity_input" type="text" name="quantity" defaultValue={1} autoComplete="off" size={2} />
-                                                <a className="cart_quantity_down" href> - </a>
-                                            </div>
-                                        </td>
-                                        <td className="cart_total">
-                                            <p className="cart_total_price">$59</p>
-                                        </td>
-                                        <td className="cart_delete">
-                                            <a className="cart_quantity_delete" href><i className="fa fa-times" /></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="cart_product">
-                                            <a href><img src="images/cart/two.png" alt /></a>
-                                        </td>
-                                        <td className="cart_description">
-                                            <h4><a href>Colorblock Scuba</a></h4>
-                                            <p>Web ID: 1089772</p>
-                                        </td>
-                                        <td className="cart_price">
-                                            <p>$59</p>
-                                        </td>
-                                        <td className="cart_quantity">
-                                            <div className="cart_quantity_button">
-                                                <a className="cart_quantity_up" href> + </a>
-                                                <input className="cart_quantity_input" type="text" name="quantity" defaultValue={1} autoComplete="off" size={2} />
-                                                <a className="cart_quantity_down" href> - </a>
-                                            </div>
-                                        </td>
-                                        <td className="cart_total">
-                                            <p className="cart_total_price">$59</p>
-                                        </td>
-                                        <td className="cart_delete">
-                                            <a className="cart_quantity_delete" href><i className="fa fa-times" /></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="cart_product">
-                                            <a href><img src="images/cart/three.png" alt /></a>
-                                        </td>
-                                        <td className="cart_description">
-                                            <h4><a href>Colorblock Scuba</a></h4>
-                                            <p>Web ID: 1089772</p>
-                                        </td>
-                                        <td className="cart_price">
-                                            <p>$59</p>
-                                        </td>
-                                        <td className="cart_quantity">
-                                            <div className="cart_quantity_button">
-                                                <a className="cart_quantity_up" href> + </a>
-                                                <input className="cart_quantity_input" type="text" name="quantity" defaultValue={1} autoComplete="off" size={2} />
-                                                <a className="cart_quantity_down" href> - </a>
-                                            </div>
-                                        </td>
-                                        <td className="cart_total">
-                                            <p className="cart_total_price">$59</p>
-                                        </td>
-                                        <td className="cart_delete">
-                                            <a className="cart_quantity_delete" href><i className="fa fa-times" /></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan={4}>&nbsp;</td>
-                                        <td colSpan={2}>
-                                            <table className="table table-condensed total-result">
-                                                <tbody><tr>
-                                                    <td>Cart Sub Total</td>
-                                                    <td>$59</td>
-                                                </tr>
-                                                    <tr>
-                                                        <td>Exo Tax</td>
-                                                        <td>$2</td>
+                            <div className="review-payment">
+                                <h2>Review &amp; Payment</h2>
+                            </div>
+                            <div className="table-responsive cart_info">
+                                <table className="table table-condensed">
+                                    <thead>
+                                        <tr className="cart_menu">
+                                            <td className="image">Sản phẩm</td>
+                                            <td className="description" />
+                                            <td className="price">Giá</td>
+                                            <td className="quantity">Số lượng</td>
+                                            <td className="total">Tổng</td>
+                                            <td />
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {list_cart}
+                                        <tr>
+                                            <td colSpan={3}>&nbsp;</td>
+                                            <td colSpan={3}>
+                                                <table className="table table-condensed total-result">
+                                                    <tbody><tr>
+                                                        <td>Tổng giá sản phẩm</td>
+                                                        <td>{this.state.total} VND</td>
                                                     </tr>
-                                                    <tr className="shipping-cost">
-                                                        <td>Shipping Cost</td>
-                                                        <td>Free</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Total</td>
-                                                        <td><span>$61</span></td>
-                                                    </tr>
-                                                </tbody></table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                        <tr className="shipping-cost">
+                                                            <td>Phí vận chuyển</td>
+                                                            <td>Free</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Tổng tiền thanh toán</td>
+                                                            <td><span>{this.state.total} VND</span></td>
+                                                        </tr>
+                                                    </tbody></table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div className="payment-options">
+                                <span>
+                                    <label><input type="checkbox" /> Direct Bank Transfer</label>
+                                </span>
+                                <span>
+                                    <label><input type="checkbox" /> Check Payment</label>
+                                </span>
+                                <span>
+                                    <label><input type="checkbox" /> Paypal</label>
+                                </span>
+                            </div>
                         </div>
-                        <div className="payment-options">
-                            <span>
-                                <label><input type="checkbox" /> Direct Bank Transfer</label>
-                            </span>
-                            <span>
-                                <label><input type="checkbox" /> Check Payment</label>
-                            </span>
-                            <span>
-                                <label><input type="checkbox" /> Paypal</label>
-                            </span>
-                        </div>
-                    </div>
-                </section> {/*/#cart_items*/}
-            </>
+                    </section>
+                    </>
+                }
+                </>
+
         );
     }
 }

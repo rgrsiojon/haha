@@ -31,7 +31,7 @@ import CreateProduct from './containers/Admin/CreateProduct'
 import UpdateProduct from './containers/Admin/UpdateProduct'
 
 import Header from './hoc/layout/Header'
-import Checkout from  './components/Checkout'
+import Checkout from  './containers/Checkout'
 import Cart from  './containers/Cart'
 import Shop from  './components/Shop'
 import ProductDetails from  './components/Product-details'
@@ -74,7 +74,7 @@ class App extends Component {
         ?
             <Switch>
                 <Route path="/" exact component={home} />
-                <Route path="/checkout" exact component={checkout} />
+                <Route path="/order" exact component={checkout} />
                 <Route path="/cart" exact component={cart} />
                 <Route path="/profile" exact component={profile} />
                 <Route path="/shop" exact component={shop} />
@@ -88,9 +88,8 @@ class App extends Component {
         
         : <Switch>
             <Route path="/" exact component={home} />
-            <Route path="/checkout" exact component={Checkout} />
+            <Route path="/order" exact component={login} />
             <Route path="/cart" exact component={login} />
-
             <Route path="/profile" exact component={login} />
 
             <Route path="/product-details" exact component={ProductDetails} />

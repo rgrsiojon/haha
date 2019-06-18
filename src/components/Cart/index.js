@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loading from './../Loading'
 import Alert from './../Alert'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Cart extends Component {
     constructor(props) {
@@ -174,15 +175,27 @@ class Cart extends Component {
                                         <li>Subtotal <span>{this.state.total} VND</span></li>
                                         <li>Tổng <span>{this.state.total} VND</span></li>
                                     </ul>
-                                    <a className="btn btn-default update" href>Tiến hành thanh toán</a>
+                                    <Link  className="btn btn-default update"  to="/order">Tiến hành thanh toán</Link>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>{/*/#do_action*/}
+                </section>
             </>
         )
     }
 }
 
 export default Cart;
+
+// {
+	
+// 	"total_pay": 10000000,
+// 	"shipping_address": "208 nguyen huu canh",
+// 	"array_id": [
+// 		{"id" : "12"},
+// 		{"id" : "10"},
+// 		{"id" : "11"}],
+// 	"user_id": "1",
+// 	"store_id" : "1"
+// }
