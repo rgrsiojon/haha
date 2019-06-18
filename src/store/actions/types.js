@@ -90,9 +90,9 @@ export const SEARCH = {
 
 export const USER = {
     //@get all user
-    GET_ALL: "GET_ALL",
-    GET_ALL_SUCCESS: "GET_ALL_SUCCESS",
-    GET_ALL_FAIL: "GET_ALL_FAIL",
+    GET_ALL: "GET_ALL_USER",
+    GET_ALL_SUCCESS: "GET_ALL_USER_SUCCESS",
+    GET_ALL_FAIL: "GET_ALL_USER_FAIL",
     //@get user ìinfo
     GET_INFO: "GET_INFO",
     GET_INFO_SUCCESS: "GET_INFO_SUCCESS",
