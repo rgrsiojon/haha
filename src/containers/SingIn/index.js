@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     login: function(email, password) {
         dispatch({
-            type: AUTH.LOGIN, 
+            type: AUTH.LOGIN_SATFF, 
             data: {
                 email: email,
                 password: password

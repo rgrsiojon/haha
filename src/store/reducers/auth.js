@@ -80,6 +80,27 @@ const logout_fail = (state, action) => {
         loading: false
     }
 }
+
+const login_satff = (state, action) => {
+    return {
+        ...state,
+        loading: true,
+    }
+}
+
+const login_satff_success = (state, action) => {
+    return {
+        ...state,
+        loading: false
+    }
+}
+
+const login_satff_fail = (state, action) => {
+    return {
+        ...state,
+        loading: false
+    }
+}
 //@compare to return
 export default (state = initial_state, action) => {
     switch (action.type) {
@@ -103,6 +124,13 @@ export default (state = initial_state, action) => {
             return logout_success(state, action)
         case AUTH.LOGOUT_FAIL:
             return logout_fail(state, action)
+        
+        case AUTH.LOGIN_SATFF:
+            return login_satff(state, action)
+        case AUTH.LOGIN_SATFF_SUCCESS:
+            return login_satff_success(state, action)
+        case AUTH.LOGIN_SATFF_FAIL:
+            return login_satff_fail(state, action)
         default:
             return state
     }

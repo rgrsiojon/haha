@@ -11,7 +11,9 @@ import {
     auth_login_fail,
     register_success,
     register_fail,
-    logout_success
+    logout_success,
+    login_satff_fail,
+    login_satff_success
 } from '../store/actions/auth';
 
 function* handler_login_with_email(actions) {
@@ -22,15 +24,10 @@ function* handler_login_with_email(actions) {
         "store_name": "1"
     }
     try {
-        const data = yield axios.post("/api/staff/sign_in", datareq)
+        const data = yield axios.post("/api/sign_in", datareq)
         .then(response => {
-            if(actions.data.email === "admin@gmail.com") {
-                cookies.set('admin', response.data, { path: '/' });
-                cookies.remove('auth');
-            } else {
-                cookies.set('auth', response.data, { path: '/' });
-                cookies.remove('admin');
-            }
+            cookies.set('auth', response.data, { path: '/' });
+            cookies.remove('admin');
             return response.data
         }).catch(error => {
             return error
@@ -39,6 +36,28 @@ function* handler_login_with_email(actions) {
         yield put(auth_login_success(data))
     } catch (err) {
         yield put(auth_login_fail(err))
+    }
+}
+
+function* handler_login_satff(actions) {
+    yield put(auth_start())
+    const datareq = {
+        "email": actions.data.email,
+        "password": actions.data.password,
+        "store_name": "1"
+    }
+    try {
+        const data = yield axios.post("/api/staff/sign_in", datareq)
+        .then(response => {
+            cookies.set('admin', response.data, { path: '/' });
+            cookies.remove('auth');
+            return response.data
+        }).catch(error => {
+            return error
+        })
+        yield put(login_satff_success(data))
+    } catch (err) {
+        yield put(login_satff_fail(err))
     }
 }
 
@@ -68,4 +87,5 @@ export function* authentication() {
     yield takeEvery(AUTH.LOGIN, handler_login_with_email)
     yield takeEvery(AUTH.REGISTER, handler_register_with_email)
     yield takeEvery(AUTH.LOGOUT, handler_logout)
+    yield takeEvery(AUTH.LOGIN_SATFF, handler_login_satff)
 }
