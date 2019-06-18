@@ -97,8 +97,7 @@ export const update_product = (data) => {
 
 export const update_product_success = (data) => {
     return {
-        type: PRODUCT.UPDATE_PRODUCT_SUCCESS,
-        data: data
+        type: PRODUCT.UPDATE_PRODUCT_SUCCESS
     }
 }
 

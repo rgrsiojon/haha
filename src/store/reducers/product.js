@@ -104,8 +104,7 @@ function update_product(state, action) {
 function update_product_success(state, action) {
     return {
         ...state,
-        is_updated: true,
-        data: action.data
+        is_updated: true
     }
 }
 

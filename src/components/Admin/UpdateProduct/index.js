@@ -6,16 +6,16 @@ class CreateProduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "",
-            descript: "",
-            cpu: "",
+            title: null,
+            descript: null,
+            cpu: null,
             ram: 0,
-            disk: 0,
-            display: "",
-            color: "",
-            gpu: "",
-            amount: 0,
-            price: 0,
+            disk: null,
+            display: null,
+            color: null,
+            gpu: null,
+            amount: null,
+            price: null,
             avatar: ""
         }
         this.id = ""
@@ -102,25 +102,23 @@ class CreateProduct extends Component {
 
     handler_button_submit() {
         let { update_product } = this.props
-        update_product({...this.state, id: this.id})
+        update_product({...this.state, id: this.props.id})
     }
 
     componentDidMount() {
         let { _get_product_by_id } = this.props
-        console.log("compoment did mount")
         _get_product_by_id(this.props.id)
     }
     
     render() {
-        console.log(this.props)
         let { is_loading, product, is_updated } = this.props.product
-        // this.id = product.id ? product.id: "" 
+
         const title = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="text-input" className=" form-control-label">Title</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input onChange={this.handler_title} type="text" id="text-input" name="text-input" placeholder="Name" value={ product.title ? product.title: "" } className="form-control" />
+                            <input onChange={this.handler_title} type="text" id="text-input" name="text-input" placeholder="Name" value={ this.state.title !== null ? this.state.title : product.title} className="form-control" />
                             <small className="form-text text-muted">This is a help text</small>
                         </div>
                     </div>: <div></div>
@@ -130,7 +128,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="textarea-input" className=" form-control-label">Description</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <textarea onChange={this.handler_descript}  value={ product.description ? product.description: "" } name="textarea-input" id="textarea-input" rows={9} placeholder="Content..." eclassName="form-control" defaultValue={""} />
+                                <textarea onChange={this.handler_descript}  value={ this.state.descript !== null ? this.state.descript : product.title}  name="textarea-input" id="textarea-input" rows={9} placeholder="Content..." eclassName="form-control" defaultValue={""} />
                             </div>
                         </div>: <div></div>
         const cpu = product !== null ? <div className="row form-group">
@@ -138,7 +136,7 @@ class CreateProduct extends Component {
                             <label htmlFor="email-input" className=" form-control-label">CPU</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input onChange={this.handler_cpu} value={ product.cpu ? product.cpu: "" } className="form-control" />
+                            <input onChange={this.handler_cpu} value={ this.state.cpu !== null ? this.state.cpu : product.cpu}  className="form-control" />
                             <small className="help-block form-text">Please enter your cpu</small>
                         </div>
                     </div>: <div></div>
@@ -147,7 +145,7 @@ class CreateProduct extends Component {
                             <label htmlFor="disabled-input" className=" form-control-label">Display</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ product.display ? product.display: "" }  onChange={this.handler_display} type="text" id="disabled-input" name="disabled-input" placeholder="Display" className="form-control" />
+                            <input value={ this.state.display !== null ? this.state.display : product.display}   onChange={this.handler_display} type="text" id="disabled-input" name="disabled-input" placeholder="Display" className="form-control" />
                         </div>
                     </div>: <div></div>
         const gpu = product !== null ? <div className="row form-group">
@@ -155,7 +153,7 @@ class CreateProduct extends Component {
                             <label htmlFor="disabled-input" className=" form-control-label">GPU</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ product.gpu ? product.gpu: "" }  onChange={this.handler_gpu} type="text" id="disabled-input" name="disabled-input" placeholder="GPU" className="form-control" />
+                            <input value={ this.state.gpu !== null ? this.state.gpu : product.gpu}   onChange={this.handler_gpu} type="text" id="disabled-input" name="disabled-input" placeholder="GPU" className="form-control" />
                         </div>
                     </div>: <div></div>
         const disk = product !== null ? <div className="row form-group">
@@ -163,7 +161,11 @@ class CreateProduct extends Component {
                             <label htmlFor="disabled-input" className=" form-control-label">Disk</label>
                         </div>
                         <div className="col-12 col-md-9">
-                            <input value={ product.disk ? product.disk: "" }  onChange={this.handler_disk} type="text" id="disabled-input" name="disabled-input" placeholder="Disk" className="form-control" />
+                            <select onChange={this.handler_disk} name="select" id="select" className="form-control">
+                                <option value="256">256Gb</option>
+                                <option value="512">512Gb</option>
+                                <option value="1024">1024Gb</option>
+                            </select>
                         </div>
                  </div>: <div></div>
 
@@ -187,7 +189,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="select" className=" form-control-label">COLOR</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <select value={ product.color ? product.color: "" } onChange={this.handler_color} name="select" id="select" className="form-control">
+                                <select value={ this.state.color !== null ? this.state.color : product.color}  onChange={this.handler_color} name="select" id="select" className="form-control">
                                     <option value="gray">Gray</option>
                                     <option value="white">White</option>
                                     <option value="gold">Gold</option>
@@ -200,7 +202,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="disabled-input" className=" form-control-label">Amount</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input value={ product.amount ? product.amount: "" } onChange={this.handler_amount} type="number" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
+                                <input value={ this.state.amount !== null ? this.state.amount : product.amount}  onChange={this.handler_amount} type="number" id="disabled-input" name="disabled-input" placeholder="Amount" className="form-control" />
                             </div>
                     </div>: <div></div>
         const price =  product !== null ? <div className="row form-group">
@@ -208,7 +210,7 @@ class CreateProduct extends Component {
                                 <label htmlFor="disabled-input" className=" form-control-label">Price</label>
                             </div>
                             <div className="col-12 col-md-9">
-                                <input value={ product.price ? product.price: "" } onChange={this.handler_price} type="number" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
+                                <input value={ this.state.price !== null ? this.state.price : product.price}  onChange={this.handler_price} type="number" id="disabled-input" name="disabled-input" placeholder="Price" className="form-control" />
                             </div>
                     </div> : <div></div>
         const image = product !== null ?  <div className="row form-group">
@@ -236,13 +238,13 @@ class CreateProduct extends Component {
                         <div className="row">
                             <div className="col-lg-12">
                                 {
-                                    is_updated === true ? <div class="alert alert-success" role="alert">
+                                    is_updated === true ? <div class="alert alert-success my--alert--secon" role="alert">
                                                             Update product is success
                                                         </div> : <div></div>
                                 }
 
                                 {
-                                    is_updated === false? <div class="alert alert-danger" role="alert">
+                                    is_updated === false? <div class="alert alert-danger my--alert--deger" role="alert">
                                             Update product to fail, please try again
                                         </div> : <div></div>
                                 }
