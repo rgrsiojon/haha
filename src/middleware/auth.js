@@ -24,7 +24,7 @@ function* handler_login_with_email(actions) {
     try {
         const data = yield axios.post("/api/staff/sign_in", datareq)
         .then(response => {
-            if(actions.data.email === "hacnguyen1412@gmail.com") {
+            if(actions.data.email === "admin@gmail.com") {
                 cookies.set('admin', response.data, { path: '/' });
                 cookies.remove('auth');
             } else {
