@@ -20,6 +20,7 @@ class CreateProduct extends Component {
         }
         this.id = ""
         this.input_file_image = React.createRef();
+        this.preview_file = React.createRef();
         this.handler_title = this.handler_title.bind(this)
         this.handler_descript = this.handler_descript.bind(this)
         this.handler_cpu = this.handler_cpu.bind(this)
@@ -32,6 +33,7 @@ class CreateProduct extends Component {
         this.handler_avatar = this.handler_avatar.bind(this)
         this.handler_display = this.handler_display.bind(this)
         this.handler_button_submit = this.handler_button_submit.bind(this)
+        this.handler_choose_file = this.handler_choose_file.bind(this)
     }
 
     handler_title(e) {
@@ -98,11 +100,23 @@ class CreateProduct extends Component {
         this.setState({
             avatar: this.input_file_image.current.files[0]
         })
+        var reader  = new FileReader();
+        reader.addEventListener("load", () => {
+            this.preview_file.current.src = reader.result; 
+        }, false);
+    
+        if (this.input_file_image.current.files[0]) {
+            reader.readAsDataURL(this.input_file_image.current.files[0])
+        }
     }
 
     handler_button_submit() {
         let { update_product } = this.props
         update_product({...this.state, id: this.props.id})
+    }
+
+    handler_choose_file() {
+        this.input_file_image.current.click()
     }
 
     componentDidMount() {
@@ -112,7 +126,6 @@ class CreateProduct extends Component {
     
     render() {
         let { is_loading, product, is_updated } = this.props.product
-
         const title = product !== null ? <div className="row form-group">
                         <div className="col col-md-3">
                             <label htmlFor="text-input" className=" form-control-label">Title</label>
@@ -217,15 +230,19 @@ class CreateProduct extends Component {
                         <div className="col col-md-3">
                             <label htmlFor="file-multiple-input" className=" form-control-label">Image</label>
                         </div>
-                        <div className="col-12 col-md-9">
-                            <input onChange={this.handler_avatar} ref={this.input_file_image} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
+                        <div className="col-12 col-md-9 text-center">
+                            <img ref={this.preview_file} className="m-b-30" src={product.avatar} width="100%"/>
+                            <button onClick={this.handler_choose_file} style={{margin: 0}} type="button" className="btn btn-fefault cart m-t-15">
+                                Thay đổi ảnh
+                            </button>
+                            <input onChange={this.handler_avatar} style={{display: "none"}} ref={this.input_file_image} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
                         </div>
                     </div>: <div></div>
-        const submit = <div className="card-footer">
+        const submit = product !== null ? <div className="card-footer">
                             <button onClick={this.handler_button_submit} type="submit" className="btn btn-success btn-sm">
                                 <i className="fa fa-dot-circle-o" /> Update
                             </button>
-                        </div>
+                        </div> : <div></div>
         
         return (
             

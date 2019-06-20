@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Loading from './../../Loading'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class Users extends Component {
 
@@ -67,12 +68,10 @@ class Users extends Component {
                         <td>{i.adress}</td>
                         <td>{i.phone}</td>
                         <td className="text-center">
-                            <a href={"/#/admin/product/macbook/update-product/" + i.id}>
-                                <button onClick={()=> {
-                                    this.handler_update_product(i.id)
-                                }} type="button" class="btn btn-outline-info">Edit
+                            <Link to={`/admin/users/${i.id}`}>
+                                <button class="btn btn-outline-info">Edit
                                 </button>
-                            </a>
+                            </Link> 
                             <button type="button" className="close" aria-label="Close">
                                 <span  onClick={()=> {
                                     this.handler_delete_product(i.id)   
