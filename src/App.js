@@ -18,7 +18,6 @@ import './App.css'
 
 import Cookies from 'universal-cookie';
 import SingIn from './containers/SingIn'
-import SingUp from './containers/SingUp'
 import Admin from './containers/Admin'
 import Users from './containers/Admin/Users'
 import UpdateUser from './containers/Admin/UpdateUser' 
@@ -61,7 +60,7 @@ class App extends Component {
         let create_product = () => <TabbarAdmin> <CreateProduct/> </TabbarAdmin>
         let update_product = ({ match }) => <TabbarAdmin> <UpdateProduct id={match.params.id}/> </TabbarAdmin>
         let users = () => <TabbarAdmin> <Users/> </TabbarAdmin>
-        let update_users = () => <TabbarAdmin> <UpdateUser/> </TabbarAdmin>
+        let update_users = ({ match }) => <TabbarAdmin> <UpdateUser id={match.params.id}/> </TabbarAdmin> 
         //@ Guest 
         let home = () => <Header><Home/></Header>
         let checkout = () => <Header><Checkout/></Header>

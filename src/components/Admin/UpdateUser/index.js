@@ -1,10 +1,77 @@
 import React, { Component } from 'react';
 
 class UpdateUser extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        let { _get_user_info } = this.props
+        _get_user_info(this.props.id)
+    }
+
     render() {
+
+        const user = this.props.user.user_info
+
+        const email = user !== null ? <div className="row form-group">
+            <div className="col col-md-3">
+                <label htmlFor="text-input" className=" form-control-label">Email</label>
+            </div>
+            <div className="col-12 col-md-9">
+                <input value={user.email} type="text" id="text-input" name="text-input" placeholder="Email" className="form-control" />
+                <small className="form-text text-muted">This is a help text</small>
+            </div>
+        </div> : <div></div>
+
+        const phone = user !== null ? <div className="row form-group">
+            <div className="col col-md-3">
+                <label htmlFor="text-input" className=" form-control-label">Phone</label>
+            </div>
+            <div className="col-12 col-md-9">
+                <input value={user.phone} type="number" id="text-input" name="text-input" placeholder="phone" className="form-control" />
+                <small className="form-text text-muted">This is a help text</small>
+            </div>
+        </div> : <div></div>
+
+        const address = user !== null ? <div className="row form-group">
+                <div className="col col-md-3">
+                    <label htmlFor="text-input" className=" form-control-label">Address</label>
+                </div>
+                <div className="col-12 col-md-9">
+                    <input type="text" value={user.address} id="text-input" name="text-input" placeholder="Email" className="form-control" />
+                    <small className="form-text text-muted">This is a help text</small>
+                </div>
+            </div>: <div></div>
+
+        const avatar = user !== null ?  <div className="row form-group">
+            <div className="col col-md-3">
+                <label htmlFor="file-multiple-input" className=" form-control-label">Image</label>
+            </div>
+            <div className="col-12 col-md-9 text-center">
+                <img className="m-b-30" src={user.avatar} width="100%"/>
+                <button style={{margin: 0}} type="button" className="btn btn-fefault cart m-t-15">
+                    Thay đổi ảnh
+                </button>
+                <input style={{display: "none"}} type="file" id="file-multiple-input" name="file-multiple-input" multiple className="form-control-file" />
+            </div>
+            </div>: <div></div>
+
+        console.log(this.props.user)
         return (
-            <div>
-                <h1>Update</h1>
+            <div className="main-content">
+                <div className="section__content section__content--p30">
+                    <div className="container-fluid">
+                        <div className="col-lg-6">
+                            {email}
+                            {phone}
+                            {address}
+                        </div>
+                        <div className="col-lg-6">
+                            {avatar}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
