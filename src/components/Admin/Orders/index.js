@@ -4,6 +4,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 class Orders extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            page: 1,
+            total_page: 0
+        }
+        this.handler_next = this.handler_next.bind(this)
+        this.handler_prev = this.handler_prev.bind(this)
+        this.handler_total = this.handler_total.bind(this)
     }
 
     componentDidMount() {
@@ -11,10 +18,47 @@ class Orders extends Component {
         _get_all_orders()
     }
 
+    handler_prev() {
+        if(this.state.page === 1) {
+            return false
+        } else {
+            this.setState(state => {
+                return {
+                    page: state.page - 1
+                }
+            })
+        }
+    }
+
+    handler_next() {
+        if(this.state.page > this.state.total_page) {
+            return false
+        } else {
+            this.setState(state => {
+                return {
+                    page: state.page + 1
+                }
+            })
+        }
+    }
+
+    handler_total(pages){
+        this.setState({
+            total_page: pages
+        })
+    }
+
+
     render() {
-        console.log(this.props)
         let order = this.props.order
-        let oeders = order.data_all_order !== null ? order.data_all_order.map(i => {
+        if(order.data_all_order !== null) {
+            let pages = parseInt(parseInt(order.data_all_order.length) / 9)
+            if(this.state.total_page !== pages) {
+                this.handler_total(pages)
+            }
+        }
+
+        let orders = order.data_all_order !== null ? order.data_all_order.slice(this.state.page * 9 - 9, this.state.page * 9).map(i => {
             return (<tr>
                 <th scope="row">{i.id}</th>
                 <td>{i.phone}</td>
@@ -62,18 +106,18 @@ class Orders extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {oeders}
+                                        {orders}
                                     </tbody>
                                 </table>   
                             </div>
                             <div className="col-sm-12 text-center m-b-25">
-                                {/* <div>
+                                <div>
                                     <a onClick={this.handler_prev} className="left recommended-item-control my--recommended-item-control-left" href="#recommended-item-carousel" data-slide="prev">
                                         <i className="fa fa-angle-left" />
                                     </a>
                                     <a className="cart_quantity_up">{this.state.page}</a>
                                     <a onClick={this.handler_next} className="left recommended-item-control my--recommended-item-control-right" href> <i className="fa fa-angle-right"></i> </a>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
 
