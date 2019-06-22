@@ -6,11 +6,12 @@ import { ORDER } from './../store/actions/types';
 
 import {
     create_order_fail,
-    create_order_success
+    create_order_success,
+    get_all_orders_fail,
+    get_all_orders_success
 } from './../store/actions/order'
 
 function* handler_order_cart(action) {
-    console.log(action.data)
     const datareq = {
         "shipping_address": action.data.shipping_address,
         "phone": action.data.phone,
@@ -22,8 +23,6 @@ function* handler_order_cart(action) {
         "user_id": "1",
         "store_id" : "1"
     }
-    console.log(action.data)
-    console.log(datareq)
     try {
         const data = yield axios.post('/api/auth/order', datareq)
         .then(response => {
@@ -31,14 +30,27 @@ function* handler_order_cart(action) {
         }).catch(error => {
             return error
         })
-        console.log(data)
         yield put(create_order_success(data))
     } catch {
         yield put(create_order_fail("Error"))
     }
 }
 
+function* handler_get_all_order() {
+    try {
+        const data = yield axios.get('/api/auth/order/1')
+        .then(response => {
+            return response.data
+        }).catch(error => {
+            return error
+        })
+        yield put(get_all_orders_success(data))
+    } catch {
+        yield put(get_all_orders_fail("Error"))
+    }
+}
+
 export function* order_of_production() {
     yield takeEvery(ORDER.CREATE_ORDER, handler_order_cart)
-
+    yield takeEvery(ORDER.GET_ALL_ORDERS, handler_get_all_order)
 }

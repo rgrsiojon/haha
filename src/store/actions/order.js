@@ -20,3 +20,23 @@ export const create_order_fail = (error) => {
         error: error
     }
 }
+
+export const get_all_orders = () => {
+    return {
+        type: ORDER.GET_ALL_ORDERS
+    }
+}
+
+export const get_all_orders_success = (data) => {
+    return {
+        type: ORDER.GET_ALL_ORDERS_SUCCESS,
+        data: data
+    }
+}
+
+export const get_all_orders_fail = (error) => {
+    return {
+        type: ORDER.GET_ALL_ORDERS_FAIL,
+        error: error
+    }
+}

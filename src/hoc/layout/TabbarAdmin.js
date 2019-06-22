@@ -55,6 +55,9 @@ class TabbarAdmin extends Component {
                                         </li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <Link to="/admin/orders">Order</Link>
+                                </li>
                             </ul>
                         </nav>
                     </div>
