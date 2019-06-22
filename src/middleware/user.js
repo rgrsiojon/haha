@@ -28,13 +28,11 @@ function* handler_get_user_info(action) {
 }
 
 function* handler_update_user_info(action) {
-    console.log(action.data.file)
     const datareq = {
         "email": action.data.email,
         "address": action.data.address,
         "phone": action.data.phone
     }
-
     var bodyFormData = new FormData();
     bodyFormData.append('file', action.data.file); 
     try {
