@@ -63,8 +63,9 @@ class Orders extends Component {
                 <th scope="row">{i.id}</th>
                 <td>{i.phone}</td>
                 <td>{i.shipping_address}</td>
-                <td>{i.status}</td>
-                <td>{i.store_id}</td>
+                <td>
+                    <Shiping status={i.status}></Shiping>
+                </td>
                 <td>{i.total_pay}</td>
                 <td className="text-center">
                     <Link to={`/admin/orders/${i.id}`}>
@@ -127,5 +128,21 @@ class Orders extends Component {
         )
     }
 }
+
+function Shiping(props) {
+    return (
+        <>
+            {
+                props.status === 0 && <span style={{backgroundColor: "#ffc107"}} class="badge badge-pill badge-danger">Chưa giao hàng</span>
+            }
+            {
+                props.status === 1 && <span style={{backgroundColor: "#007bff"}} class="badge badge-pill badge-danger">Đang giao hàng</span>
+            }
+            {
+                props.status === 2 && <span style={{backgroundColor: "#28a745"}} class="badge badge-pill badge-danger">Đã giao hàng</span>
+            }
+        </>
+    )
+} 
 
 export default Orders;
