@@ -5,15 +5,23 @@ import {
     get_order_by_id
 } from './../../../store/actions/order'
 
+import { 
+    get_user_info
+} from './../../../store/actions/user'
+
 
 const map_state_to_props = state => ({
     auth: state.auth, 
-    order: state.order
+    order: state.order,
+    user: state.user
 })
 
 const map_dispatch_to_props = dispatch => ({
     _get_order_by_id: function(id) {
         dispatch(get_order_by_id(id))
+    },
+    _get_user_by_id: function(id) {
+        dispatch(get_user_info(id))
     }
 })
 
