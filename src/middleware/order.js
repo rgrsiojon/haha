@@ -8,7 +8,9 @@ import {
     create_order_fail,
     create_order_success,
     get_all_orders_fail,
-    get_all_orders_success
+    get_all_orders_success,
+    get_order_by_id_fail,
+    get_order_by_id_success
 } from './../store/actions/order'
 
 function* handler_order_cart(action) {
@@ -50,7 +52,22 @@ function* handler_get_all_order() {
     }
 }
 
+function* handler_get_order_by_id(action) {
+    try {
+        const data = yield axios.get(`/api/auth/info_order/${action.id}`)
+        .then(reponse => {
+            return reponse.data
+        }).catch(error=> {
+            return error
+        })
+        yield put(get_order_by_id_success(data))
+    } catch {
+        yield put(get_order_by_id_fail("Error"))
+    }
+}
+
 export function* order_of_production() {
     yield takeEvery(ORDER.CREATE_ORDER, handler_order_cart)
     yield takeEvery(ORDER.GET_ALL_ORDERS, handler_get_all_order)
+    yield takeEvery(ORDER.GET_ORDER_BY_ID, handler_get_order_by_id)
 }

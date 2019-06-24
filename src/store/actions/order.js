@@ -40,3 +40,24 @@ export const get_all_orders_fail = (error) => {
         error: error
     }
 }
+
+export const get_order_by_id = (id) => {
+    return {
+        type: ORDER.GET_ORDER_BY_ID,
+        id: id
+    }
+}
+
+export const get_order_by_id_success = (data) => {
+    return {
+        type: ORDER.GET_ORDER_BY_ID_SUCCESS,
+        data: data
+    }
+}
+ 
+export const get_order_by_id_fail = (error) => {
+    return {
+        type: ORDER.GET_ORDER_BY_ID_FAIL,
+        error: error
+    }
+}

@@ -21,6 +21,7 @@ import Admin from './containers/Admin'
 import Users from './containers/Admin/Users'
 import UpdateUser from './containers/Admin/UpdateUser' 
 import Orders from './containers/Admin/Orders'
+import Order from './containers/Admin/Order'
 import Home from './containers/Home'
 import TabbarAdmin from './hoc/layout/TabbarAdmin'
 import { PAGE } from './Common'
@@ -62,6 +63,7 @@ class App extends Component {
         let users = () => <TabbarAdmin> <Users/> </TabbarAdmin>
         let update_users = ({ match }) => <TabbarAdmin> <UpdateUser id={match.params.id}/> </TabbarAdmin> 
         let orders = () => <TabbarAdmin> <Orders/> </TabbarAdmin>
+        let order = ({ match }) => <TabbarAdmin> <Order id={match.params.id}/> </TabbarAdmin> 
         //@ Guest 
         let home = () => <Header><Home/></Header>
         let checkout = () => <Header><Checkout/></Header>
@@ -107,6 +109,7 @@ class App extends Component {
             <Route path="/admin" exact component={admin}/>
             <Route path="/admin/users"exact component={users}/>
             <Route path="/admin/orders"exact component={orders}/>
+            <Route path="/admin/orders/:id"exact component={order}/>
             <Route path="/admin/users/:id" exact component={update_users}/>
             <Route path="/admin/product/macbook/create-product" exact component={create_product}></Route>
             <Route path="/admin/product/macbook/update-product/:id" exact component={update_product}></Route>
